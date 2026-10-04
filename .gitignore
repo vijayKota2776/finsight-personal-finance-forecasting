@@ -1,0 +1,15 @@
+# Environment and secrets
+.env
+__pycache__/
+*.pyc
+
+# Data
+data/
+
+# Viva preparation
+viva_questions.md
+
+# Virtual environments
+venv/
+.venv/
+env/

@@ -59,10 +59,12 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     model_path = os.path.join("models", "rf_forecasting_model.pkl")
+    anomaly_model_path = os.path.join("models", "anomaly_model.pkl")
     features_path = os.path.join("models", "feature_names.pkl")
     model = joblib.load(model_path)
+    anomaly_model = joblib.load(anomaly_model_path)
     feature_names = joblib.load(features_path)
-    return model, feature_names
+    return model, anomaly_model, feature_names
 
 @st.cache_data
 def load_historical_data():
@@ -70,12 +72,11 @@ def load_historical_data():
     return df
 
 try:
-    model, feature_names = load_model()
+    model, anomaly_model, feature_names = load_model()
     historical_df = load_historical_data()
 except Exception as e:
     st.error(f"Error loading model or data: {e}. Please ensure you've run the training script.")
     st.stop()
-
 # Get the most recent month's data as a baseline for the simulator
 latest_data = historical_df.iloc[-1]
 
@@ -187,21 +188,24 @@ with st.spinner("Calculating SHAP values..."):
 
 st.markdown("---")
 
-# 3. Anomaly Detection Insight (Rule-based for MVP)
+# 3. Anomaly Detection Insight (Phase 10: Isolation Forest)
 st.markdown("### 🚨 Financial Insights")
 insights = []
 
-if sim_shopping > (latest_data.get('cat_shopping', 0) * 1.5):
-    insights.append("⚠️ **Anomaly Detected:** Your simulated shopping expense is 50% higher than last month.")
+# Use Isolation Forest to predict if the simulated behavior is an anomaly (-1 means anomaly, 1 means normal)
+anomaly_prediction = anomaly_model.predict(input_df)[0]
 
-if sim_total_expense > latest_data['rolling_3m_expense']:
-    insights.append("📈 **Trend Alert:** Your total expenses are trending higher than your 3-month rolling average.")
+if anomaly_prediction == -1:
+    insights.append("⚠️ **Unusual Behavior Detected:** The Isolation Forest model flagged your simulated expenses as a statistical anomaly compared to your historical behavior.")
+
+if sim_total_expense > latest_data['rolling_3m_expense'] * 1.2:
+    insights.append("📈 **Trend Alert:** Your total expenses are trending significantly higher than your 3-month rolling average.")
 
 if sim_savings < 0:
     insights.append("🛑 **Critical:** You are projected to spend more than you earn this month.")
 
 if not insights:
-    st.success("✅ Your financial behavior looks stable compared to recent trends.")
+    st.success("✅ Your financial behavior looks stable and normal.")
 else:
     for insight in insights:
         st.warning(insight)

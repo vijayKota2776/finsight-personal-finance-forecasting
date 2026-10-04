@@ -4,11 +4,10 @@ import os
 import joblib
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, IsolationForest
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import warnings
 warnings.filterwarnings('ignore')
-
 def load_data(filepath):
     print("Loading preprocessed dataset...")
     df = pd.read_csv(filepath)
@@ -75,18 +74,36 @@ if __name__ == "__main__":
     print(f"Average RMSE: ${rf_metrics['RMSE']:.2f}")
     print(f"Average R2:   {rf_metrics['R2']:.4f}\n")
     
+    # 3. Gradient Boosting Regressor (Phase 7 Requirement)
+    print("--- Training Gradient Boosting Regressor ---")
+    gb_model = GradientBoostingRegressor(n_estimators=100, random_state=42)
+    gb_metrics = evaluate_model(gb_model, X, y)
+    print(f"Average MAE:  ${gb_metrics['MAE']:.2f}")
+    print(f"Average RMSE: ${gb_metrics['RMSE']:.2f}")
+    print(f"Average R2:   {gb_metrics['R2']:.4f}\n")
+    
     # Train the final model on the ENTIRE dataset so it's ready for future predictions
+    # Random Forest is usually more stable for small datasets and SHAP explainability
     print("Training final Random Forest model on all available data...")
     final_rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
     final_rf_model.fit(X, y)
     
-    # Save the model
+    # PHASE 10: Anomaly Detection with Isolation Forest
+    print("--- Training Isolation Forest for Anomaly Detection ---")
+    iso_forest = IsolationForest(contamination=0.05, random_state=42) # 5% assumed anomaly rate
+    iso_forest.fit(X)
+    
+    # Save the models
     model_path = os.path.join(model_dir, "rf_forecasting_model.pkl")
+    anomaly_model_path = os.path.join(model_dir, "anomaly_model.pkl")
+    
     joblib.dump(final_rf_model, model_path)
+    joblib.dump(iso_forest, anomaly_model_path)
     
     # Also save the list of feature names so the Streamlit app knows the exact expected input format
     features_path = os.path.join(model_dir, "feature_names.pkl")
     joblib.dump(list(X.columns), features_path)
     
-    print(f"Final model saved to {model_path}")
+    print(f"Final forecasting model saved to {model_path}")
+    print(f"Anomaly detection model saved to {anomaly_model_path}")
     print(f"Feature names saved to {features_path}")

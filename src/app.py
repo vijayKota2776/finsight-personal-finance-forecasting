@@ -26,8 +26,17 @@ try:
 except Exception as e:
     st.error(f"Could not load data: {e}")
 
-# 2. SHAP Explainability
-st.header("2. Model Explainability (SHAP)")
+# 2. Model Comparison & Conclusion
+st.header("2. Model Comparison & Conclusion")
+st.write("We evaluated multiple models using TimeSeriesSplit to prevent data leakage.")
+try:
+    with open(os.path.join(DOCS_DIR, "experiments.md"), "r") as f:
+        st.markdown(f.read())
+except Exception as e:
+    st.warning("Could not load experiments.md. Run train_model.py first.")
+
+# 3. SHAP Explainability
+st.header("3. Model Explainability (SHAP)")
 st.write("To understand why the Random Forest makes specific predictions, we use SHAP (SHapley Additive exPlanations).")
 try:
     image = Image.open(os.path.join(DOCS_DIR, "shap_summary.png"))
@@ -35,8 +44,8 @@ try:
 except Exception as e:
     st.warning("SHAP plot not found. Run the training script locally to generate it.")
 
-# 3. Model Inference
-st.header("3. Interactive Forecast Simulator")
+# 4. Model Inference
+st.header("4. Interactive Forecast Simulator")
 st.write("Test the trained Random Forest model with custom inputs.")
 
 try:

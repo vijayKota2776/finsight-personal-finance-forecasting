@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BrainCircuit, AlertTriangle, TrendingUp, Calendar, CheckCircle2, ChevronRight, Loader2, Edit3, Save } from "lucide-react";
+import { BrainCircuit, AlertTriangle, TrendingUp, Calendar, CheckCircle2, ChevronRight, Loader2, Edit3, Save, Lock } from "lucide-react";
 
 export default function BudgetsPage() {
   const [transactions, setTransactions] = useState([]);
@@ -47,6 +47,9 @@ export default function BudgetsPage() {
     Utilities: 8000,
   });
 
+  const today = new Date().getDate();
+  const isFirstDay = today === 1;
+
   const handleRunAudit = () => {
     setIsAuditing(true);
     setTimeout(() => {
@@ -59,12 +62,16 @@ export default function BudgetsPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       
       {/* Date Header & Notification */}
-      <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex items-start gap-4">
-        <Calendar className="w-6 h-6 text-blue-600 mt-1 shrink-0" />
+      <div className={`border rounded-2xl p-4 flex items-start gap-4 ${isFirstDay ? 'bg-blue-50 border-blue-100' : 'bg-gray-50 border-gray-200'}`}>
+        <Calendar className={`w-6 h-6 mt-1 shrink-0 ${isFirstDay ? 'text-blue-600' : 'text-gray-500'}`} />
         <div>
-          <h3 className="text-blue-900 font-bold text-lg">Action Required: First of the Month</h3>
-          <p className="text-blue-800 text-sm mt-1">
-            It's the beginning of a new month. Please review your budget limits and run the AI Audit to analyze your past month's financial behavior.
+          <h3 className={`font-bold text-lg ${isFirstDay ? 'text-blue-900' : 'text-gray-900'}`}>
+            {isFirstDay ? 'Action Required: First of the Month' : 'Mid-Month Budget Locked'}
+          </h3>
+          <p className={`text-sm mt-1 ${isFirstDay ? 'text-blue-800' : 'text-gray-600'}`}>
+            {isFirstDay 
+              ? "It's the beginning of a new month. Please review and plan your budget limits below. You can also run the AI Audit on last month's data."
+              : "Budget planning is only available on the 1st day of the month to enforce financial discipline. You can still run an AI Audit anytime."}
           </p>
         </div>
       </div>
@@ -73,15 +80,56 @@ export default function BudgetsPage() {
         
         {/* Left Col: Budgets */}
         <div className="lg:col-span-2 space-y-6">
+
+          {/* Budget Planning Form (Only visible in edit mode) */}
+          {isEditingBudgets && (
+            <div className="bg-white rounded-2xl border border-emerald-100 shadow-md p-6 animate-in slide-in-from-top-2">
+              <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+                <h2 className="text-xl font-bold text-gray-900">Plan Monthly Budget</h2>
+                <button 
+                  onClick={() => setIsEditingBudgets(false)}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-sm"
+                >
+                  Save Budget Plan
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {Object.keys(budgets).map(category => (
+                  <div key={`edit-${category}`} className="space-y-1.5">
+                    <label className="text-sm font-semibold text-gray-700">{category}</label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium">₹</span>
+                      <input 
+                        type="number" 
+                        value={budgets[category]}
+                        onChange={(e) => setBudgets({...budgets, [category]: Number(e.target.value)})}
+                        className="w-full pl-8 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500 transition-colors font-medium text-gray-900"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Current Month Budgets</h2>
-              <button 
-                onClick={() => setIsEditingBudgets(!isEditingBudgets)}
-                className="text-sm font-medium text-emerald-600 flex items-center gap-1 hover:text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors"
-              >
-                {isEditingBudgets ? <><Save className="w-4 h-4" /> Save</> : <><Edit3 className="w-4 h-4" /> Edit</>}
-              </button>
+              <h2 className="text-xl font-bold text-gray-900">Budget Tracker</h2>
+              
+              {!isEditingBudgets && (
+                <button 
+                  onClick={() => isFirstDay ? setIsEditingBudgets(true) : alert("Budget planning is strictly locked to the 1st of every month for discipline.")}
+                  className={`text-sm font-medium flex items-center gap-1 px-4 py-2 rounded-xl transition-colors ${
+                    isFirstDay 
+                      ? "text-emerald-700 bg-emerald-50 hover:bg-emerald-100" 
+                      : "text-gray-500 bg-gray-100 cursor-not-allowed"
+                  }`}
+                  title={!isFirstDay ? "Locked until the 1st of next month" : "Edit Budget"}
+                >
+                  {isFirstDay ? <><Edit3 className="w-4 h-4" /> Plan Budget</> : <><Lock className="w-4 h-4" /> Locked</>}
+                </button>
+              )}
             </div>
             
             <div className="space-y-8">
@@ -96,22 +144,9 @@ export default function BudgetsPage() {
                   <div key={category}>
                     <div className="flex justify-between mb-2 items-center">
                       <span className="font-semibold text-gray-900">{category}</span>
-                      
-                      {isEditingBudgets ? (
-                        <div className="flex items-center gap-2">
-                          <span className="text-gray-500 font-medium text-sm">₹</span>
-                          <input 
-                            type="number" 
-                            value={budgets[category]}
-                            onChange={(e) => setBudgets({...budgets, [category]: Number(e.target.value)})}
-                            className="w-24 px-2 py-1 text-sm font-semibold border border-emerald-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                          />
-                        </div>
-                      ) : (
-                        <span className="text-sm font-medium text-gray-500">
-                          <strong className={isOver ? 'text-red-600' : 'text-gray-900'}>{formatMoney(spent)}</strong> / {formatMoney(limit)}
-                        </span>
-                      )}
+                      <span className="text-sm font-medium text-gray-500">
+                        <strong className={isOver ? 'text-red-600' : 'text-gray-900'}>{formatMoney(spent)}</strong> / {formatMoney(limit)}
+                      </span>
                     </div>
                     <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden">
                       <div 

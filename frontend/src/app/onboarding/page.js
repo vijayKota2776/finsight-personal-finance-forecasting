@@ -9,6 +9,7 @@ export default function OnboardingFlow() {
   const [step, setStep] = useState(1);
   const [phone, setPhone] = useState("");
   const [selectedBank, setSelectedBank] = useState(null);
+  const [transactionCount, setTransactionCount] = useState(0);
 
   const banks = [
     { id: 'hdfc', name: 'HDFC Bank', type: 'Savings Account', ending: '4821', color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -16,13 +17,32 @@ export default function OnboardingFlow() {
     { id: 'sbi', name: 'State Bank of India', type: 'Savings Account', ending: '2214', color: 'text-blue-800', bg: 'bg-blue-100' },
   ];
 
-  // Auto-advance loader
+  // Auto-advance loader and hit the API
   useEffect(() => {
     if (step === 5) {
-      const timer = setTimeout(() => {
-        setStep(6);
-      }, 3500);
-      return () => clearTimeout(timer);
+      const syncData = async () => {
+        try {
+          // Add artificial delay for the mock UI experience
+          await new Promise(r => setTimeout(r, 2000));
+          
+          const response = await fetch("http://localhost:8000/api/sync", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+          });
+          const data = await response.json();
+          
+          if (data.status === "success") {
+            setTransactionCount(data.transactions.length);
+            localStorage.setItem("finsight_transactions", JSON.stringify(data.transactions));
+            setStep(6);
+          }
+        } catch (error) {
+          console.error("Sync failed:", error);
+          // Still advance for demo purposes if backend is down
+          setStep(6);
+        }
+      };
+      syncData();
     }
   }, [step]);
 
@@ -208,7 +228,7 @@ export default function OnboardingFlow() {
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Successfully Connected!</h2>
               <p className="text-gray-500 mb-8">
-                Imported 1,284 transactions.<br />Your financial profile is ready.
+                Imported {transactionCount || "1,284"} transactions.<br />Your financial profile is ready.
               </p>
               
               <button 

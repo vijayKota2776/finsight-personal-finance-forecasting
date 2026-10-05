@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceArea } from "recharts";
-import { BrainCircuit, AlertTriangle, Play, Sparkles } from "lucide-react";
+import { BrainCircuit, AlertTriangle, Play, Sparkles, Loader2 } from "lucide-react";
 
 export default function ForecastPage() {
   const [historicalData, setHistoricalData] = useState([]);

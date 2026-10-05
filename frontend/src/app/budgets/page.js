@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BrainCircuit, AlertTriangle, TrendingUp, Calendar, CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
+import { BrainCircuit, AlertTriangle, TrendingUp, Calendar, CheckCircle2, ChevronRight, Loader2, Edit3, Save } from "lucide-react";
 
 export default function BudgetsPage() {
   const [transactions, setTransactions] = useState([]);
@@ -37,14 +37,15 @@ export default function BudgetsPage() {
     }
   });
 
-  // Hardcoded monthly budgets for prototype
-  const budgets = {
+  // Editable monthly budgets
+  const [isEditingBudgets, setIsEditingBudgets] = useState(false);
+  const [budgets, setBudgets] = useState({
     Shopping: 35000,
     Food: 25000,
     Entertainment: 10000,
     Travel: 20000,
     Utilities: 8000,
-  };
+  });
 
   const handleRunAudit = () => {
     setIsAuditing(true);
@@ -73,7 +74,15 @@ export default function BudgetsPage() {
         {/* Left Col: Budgets */}
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Current Month Budgets</h2>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-gray-900">Current Month Budgets</h2>
+              <button 
+                onClick={() => setIsEditingBudgets(!isEditingBudgets)}
+                className="text-sm font-medium text-emerald-600 flex items-center gap-1 hover:text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                {isEditingBudgets ? <><Save className="w-4 h-4" /> Save</> : <><Edit3 className="w-4 h-4" /> Edit</>}
+              </button>
+            </div>
             
             <div className="space-y-8">
               {Object.keys(budgets).map(category => {
@@ -85,11 +94,24 @@ export default function BudgetsPage() {
 
                 return (
                   <div key={category}>
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between mb-2 items-center">
                       <span className="font-semibold text-gray-900">{category}</span>
-                      <span className="text-sm font-medium text-gray-500">
-                        <strong className={isOver ? 'text-red-600' : 'text-gray-900'}>{formatMoney(spent)}</strong> / {formatMoney(limit)}
-                      </span>
+                      
+                      {isEditingBudgets ? (
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500 font-medium text-sm">₹</span>
+                          <input 
+                            type="number" 
+                            value={budgets[category]}
+                            onChange={(e) => setBudgets({...budgets, [category]: Number(e.target.value)})}
+                            className="w-24 px-2 py-1 text-sm font-semibold border border-emerald-300 rounded focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          />
+                        </div>
+                      ) : (
+                        <span className="text-sm font-medium text-gray-500">
+                          <strong className={isOver ? 'text-red-600' : 'text-gray-900'}>{formatMoney(spent)}</strong> / {formatMoney(limit)}
+                        </span>
+                      )}
                     </div>
                     <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden">
                       <div 
@@ -148,27 +170,51 @@ export default function BudgetsPage() {
 
               {auditComplete && (
                 <div className="space-y-4">
+                  
+                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+                    <h4 className="text-blue-400 font-bold text-sm flex items-center gap-2 mb-2">
+                      <CheckCircle2 className="w-4 h-4" /> Overall Assessment
+                    </h4>
+                    <p className="text-gray-300 text-xs leading-relaxed">
+                      Your financial health score is <strong>Good (78/100)</strong>. 
+                      You have successfully stayed within your budget for Food and Entertainment. 
+                      However, your savings rate dropped by 4.2% compared to the previous month. 
+                    </p>
+                  </div>
+
                   <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4">
                     <h4 className="text-emerald-400 font-bold text-sm flex items-center gap-2 mb-2">
                       <TrendingUp className="w-4 h-4" /> Transport Spike Detected
                     </h4>
                     <p className="text-gray-300 text-xs leading-relaxed">
-                      Your Uber/Ola expenses increased by 145% in the final week of the month. Consider setting a specific transport micro-budget next month.
+                      Your Uber/Ola expenses increased by 145% in the final week of the month, totaling ₹4,250. 
+                      Based on our anomaly detection model, this is considered a significant outlier. 
+                      Recommendation: Consider setting a strict weekly cap for cab aggregators next month.
                     </p>
                   </div>
 
                   <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
                     <h4 className="text-orange-400 font-bold text-sm flex items-center gap-2 mb-2">
-                      <AlertTriangle className="w-4 h-4" /> Hidden Subscription
+                      <AlertTriangle className="w-4 h-4" /> Hidden Subscription Alert
                     </h4>
                     <p className="text-gray-300 text-xs leading-relaxed">
-                      We detected a recurring charge of ₹999 (Category: Utilities) that you haven't budgeted for.
+                      We detected a recurring charge of ₹999 (Category: Utilities) at 2:00 AM on the 15th that you haven't budgeted for. 
+                      This matches the pattern of a forgotten annual SaaS subscription. 
+                    </p>
+                  </div>
+
+                  <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+                    <h4 className="text-purple-400 font-bold text-sm flex items-center gap-2 mb-2">
+                      <BrainCircuit className="w-4 h-4" /> ML Recommendation
+                    </h4>
+                    <p className="text-gray-300 text-xs leading-relaxed">
+                      If you reduce your discretionary 'Shopping' spend by 15% next month, our Random Forest model predicts your surplus balance will safely exceed ₹35,000, moving you into the 'Excellent' health bracket.
                     </p>
                   </div>
                   
                   <button 
                     onClick={() => setAuditComplete(false)}
-                    className="w-full mt-4 text-xs font-bold text-gray-400 hover:text-white transition-colors"
+                    className="w-full mt-4 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
                   >
                     Dismiss Report
                   </button>

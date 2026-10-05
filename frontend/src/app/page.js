@@ -7,6 +7,9 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const [transactions, setTransactions] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newTxn, setNewTxn] = useState({ amount: "", merchant: "", category: "cat_shopping", type: "debit" });
+  
   const [metrics, setMetrics] = useState({
     balance: 0,
     income: 0,
@@ -46,6 +49,33 @@ export default function Home() {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
   };
 
+  const handleAddTransaction = () => {
+    if (!newTxn.amount || !newTxn.merchant) return;
+    
+    const newEntry = {
+      id: `txn_manual_${Date.now()}`,
+      date: new Date().toISOString().split('T')[0],
+      amount: parseFloat(newTxn.amount),
+      merchant: newTxn.merchant,
+      category: newTxn.category,
+      type: newTxn.type
+    };
+    
+    const updatedTransactions = [newEntry, ...transactions];
+    setTransactions(updatedTransactions);
+    localStorage.setItem("finsight_transactions", JSON.stringify(updatedTransactions));
+    
+    // Update metrics
+    if (newEntry.type === 'credit') {
+      setMetrics(prev => ({ ...prev, balance: prev.balance + newEntry.amount, income: prev.income + newEntry.amount }));
+    } else {
+      setMetrics(prev => ({ ...prev, balance: prev.balance - newEntry.amount, expenses: prev.expenses + newEntry.amount }));
+    }
+    
+    setIsModalOpen(false);
+    setNewTxn({ amount: "", merchant: "", category: "cat_shopping", type: "debit" });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -61,11 +91,95 @@ export default function Home() {
             Connect Bank to Start
           </button>
         ) : (
-          <button className="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-gray-800 transition-colors shadow-sm">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-gray-800 transition-colors shadow-sm"
+          >
             Add Manual Entry
           </button>
         )}
       </div>
+
+      {/* Manual Entry Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 animate-in zoom-in-95 duration-200">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Add Transaction</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-semibold text-gray-700 mb-1 block">Merchant / Details</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Starbucks Coffee"
+                  value={newTxn.merchant}
+                  onChange={(e) => setNewTxn({...newTxn, merchant: e.target.value})}
+                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-semibold text-gray-700 mb-1 block">Amount</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium">₹</span>
+                  <input 
+                    type="number" 
+                    placeholder="0.00"
+                    value={newTxn.amount}
+                    onChange={(e) => setNewTxn({...newTxn, amount: e.target.value})}
+                    className="w-full pl-8 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Type</label>
+                  <select 
+                    value={newTxn.type}
+                    onChange={(e) => setNewTxn({...newTxn, type: e.target.value})}
+                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                  >
+                    <option value="debit">Expense</option>
+                    <option value="credit">Income</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Category</label>
+                  <select 
+                    value={newTxn.category}
+                    onChange={(e) => setNewTxn({...newTxn, category: e.target.value})}
+                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                  >
+                    <option value="cat_shopping">Shopping</option>
+                    <option value="cat_food_drink">Food & Drink</option>
+                    <option value="cat_travel">Travel</option>
+                    <option value="cat_entertainment">Entertainment</option>
+                    <option value="cat_utilities">Utilities</option>
+                    <option value="income">Income</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="flex-1 py-2.5 rounded-xl font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleAddTransaction}
+                disabled={!newTxn.amount || !newTxn.merchant}
+                className="flex-1 py-2.5 rounded-xl font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition-colors disabled:opacity-50"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Metric Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -111,7 +225,7 @@ export default function Home() {
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
           <h2 className="text-lg font-bold text-gray-900">Recent Transactions</h2>
-          <button className="text-sm text-emerald-600 font-bold hover:text-emerald-700">View All</button>
+          <button onClick={() => router.push('/transactions')} className="text-sm text-emerald-600 font-bold hover:text-emerald-700">View All</button>
         </div>
         
         <div className="divide-y divide-gray-100">

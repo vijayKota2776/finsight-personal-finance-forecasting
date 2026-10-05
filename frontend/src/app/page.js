@@ -114,7 +114,7 @@ export default function Home() {
                   placeholder="e.g. Starbucks Coffee"
                   value={newTxn.merchant}
                   onChange={(e) => setNewTxn({...newTxn, merchant: e.target.value})}
-                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -127,7 +127,7 @@ export default function Home() {
                     placeholder="0.00"
                     value={newTxn.amount}
                     onChange={(e) => setNewTxn({...newTxn, amount: e.target.value})}
-                    className="w-full pl-8 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                    className="w-full pl-8 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-emerald-500"
                   />
                 </div>
               </div>
@@ -138,7 +138,7 @@ export default function Home() {
                   <select 
                     value={newTxn.type}
                     onChange={(e) => setNewTxn({...newTxn, type: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-emerald-500"
                   >
                     <option value="debit">Expense</option>
                     <option value="credit">Income</option>
@@ -149,7 +149,7 @@ export default function Home() {
                   <select 
                     value={newTxn.category}
                     onChange={(e) => setNewTxn({...newTxn, category: e.target.value})}
-                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-500"
+                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-emerald-500"
                   >
                     <option value="cat_shopping">Shopping</option>
                     <option value="cat_food_drink">Food & Drink</option>

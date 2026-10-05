@@ -3,7 +3,7 @@
 import "./globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, BrainCircuit, Receipt, Wallet, Bell, Search, User } from "lucide-react";
+import { LayoutDashboard, BrainCircuit, Receipt, Wallet, Bell, Search, User, Settings } from "lucide-react";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
     { name: "Transactions", href: "/transactions", icon: Receipt },
     { name: "Budgets", href: "/budgets", icon: Wallet },
     { name: "AI Forecast", href: "/forecast", icon: BrainCircuit },
+    { name: "Settings", href: "/settings", icon: Settings },
   ];
 
   const isAuthPage = pathname === "/onboarding";

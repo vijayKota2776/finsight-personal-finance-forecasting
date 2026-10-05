@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
+import random
+from datetime import datetime, timedelta
 
 app = FastAPI(title="FinSight API", description="API for Personal Finance Forecasting", version="1.0.0")
 
@@ -110,3 +112,60 @@ def predict_forecast(req: SimulationRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/sync")
+def sync_mock_bank_data():
+    """Generates 3 months of highly realistic, categorized fake transaction data"""
+    merchants = {
+        "cat_shopping": ["Amazon", "Flipkart", "Myntra"],
+        "cat_food_drink": ["Swiggy", "Zomato", "Starbucks"],
+        "cat_entertainment": ["Netflix", "Spotify", "PVR Cinemas"],
+        "cat_travel": ["Uber", "Ola", "MakeMyTrip"],
+        "cat_utilities": ["Electricity Board", "Jio Recharge", "Airtel Broadband"]
+    }
+    
+    transactions = []
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=90)
+    
+    # Generate 3 months of salary (Income)
+    for i in range(3):
+        dt = (end_date - timedelta(days=30*i))
+        date_str = dt.replace(day=1).strftime("%Y-%m-%d")
+        transactions.append({
+            "id": f"txn_sal_{i}",
+            "date": date_str, 
+            "amount": 85000.0, 
+            "category": "income", 
+            "merchant": "TECH CORP SALARY", 
+            "type": "credit"
+        })
+
+    # Generate daily expenses
+    curr_date = start_date
+    txn_id = 1
+    while curr_date <= end_date:
+        if random.random() > 0.4:  # 60% chance of spending on a given day
+            cat = random.choice(list(merchants.keys()))
+            merchant = random.choice(merchants[cat])
+            # Higher amounts for shopping/travel, lower for food
+            if cat in ['cat_shopping', 'cat_travel']:
+                amount = round(random.uniform(500, 4500), 2)
+            else:
+                amount = round(random.uniform(150, 1200), 2)
+                
+            transactions.append({
+                "id": f"txn_exp_{txn_id}",
+                "date": curr_date.strftime("%Y-%m-%d"),
+                "amount": amount,
+                "category": cat,
+                "merchant": merchant,
+                "type": "debit"
+            })
+            txn_id += 1
+        curr_date += timedelta(days=1)
+        
+    # Sort descending by date
+    transactions = sorted(transactions, key=lambda x: x['date'], reverse=True)
+    return {"status": "success", "message": "Successfully synced 3 months of data", "transactions": transactions}
+

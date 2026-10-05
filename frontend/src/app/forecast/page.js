@@ -73,7 +73,8 @@ export default function ForecastPage() {
           income: simIncome,
           cat_shopping: simShopping,
           cat_food_drink: simFood,
-          cat_entertainment: simEntertainment
+          cat_entertainment: simEntertainment,
+          user_id: "user_01"
         })
       });
       const data = await res.json();

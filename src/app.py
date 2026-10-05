@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import os
+import numpy as np
 from PIL import Image
 
 # Setup paths assuming this script is in `src/app.py`
@@ -50,6 +51,7 @@ st.write("Test the trained Random Forest model with custom inputs.")
 
 try:
     model = joblib.load(os.path.join(MODEL_DIR, "rf_forecasting_model.pkl"))
+    anomaly_model = joblib.load(os.path.join(MODEL_DIR, "anomaly_model.pkl"))
     feature_names = joblib.load(os.path.join(MODEL_DIR, "feature_names.pkl"))
     
     st.markdown("### Enter Financial Features")
@@ -70,9 +72,28 @@ try:
                 
     if st.button("🔮 Predict Next Month's Expense", type="primary"):
         input_df = pd.DataFrame([user_inputs])
+        
+        # 1. Base Prediction
         prediction = model.predict(input_df)[0]
         
+        # 2. Prediction Interval (using tree variance)
+        preds = np.stack([tree.predict(input_df.values) for tree in model.estimators_])
+        std_dev = np.std(preds)
+        lower_bound = max(0, prediction - (1.96 * std_dev))
+        upper_bound = prediction + (1.96 * std_dev)
+        
+        # 3. Anomaly Detection
+        anomaly_score = anomaly_model.predict(input_df)[0]
+        is_anomaly = anomaly_score == -1
+
         st.success(f"### 📈 Predicted Expense: ₹{prediction:,.2f}")
+        
+        st.info(f"**95% Confidence Interval:** We are 95% confident your expense will fall between **₹{lower_bound:,.2f}** and **₹{upper_bound:,.2f}**.")
+        
+        if is_anomaly:
+            st.error("⚠️ **Anomaly Detected:** These input combinations represent highly unusual financial behavior compared to your historical data.")
+        else:
+            st.success("✅ **Normal Behavior:** This spending pattern aligns with your historical data.")
         
 except Exception as e:
     st.error(f"Error loading the model. Ensure rf_forecasting_model.pkl exists in the models folder. Details: {e}")

@@ -55,7 +55,7 @@ export default function ForecastPage() {
       }
       
       // Fallback to generic API data if no local transactions exist yet
-      const res = await fetch("http://localhost:8000/api/historical");
+      const res = await fetch("https://finsight-backend-48d8.onrender.com/api/historical");
       const data = await res.json();
       setHistoricalData(data);
     } catch (e) {
@@ -66,7 +66,7 @@ export default function ForecastPage() {
   const runForecast = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/api/predict", {
+      const res = await fetch("https://finsight-backend-48d8.onrender.com/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

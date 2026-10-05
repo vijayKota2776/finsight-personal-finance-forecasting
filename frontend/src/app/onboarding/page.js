@@ -25,7 +25,7 @@ export default function OnboardingFlow() {
           // Add artificial delay for the mock UI experience
           await new Promise(r => setTimeout(r, 2000));
           
-          const response = await fetch("http://localhost:8000/api/sync", {
+          const response = await fetch("https://finsight-backend-48d8.onrender.com/api/sync", {
             method: "POST",
             headers: { "Content-Type": "application/json" }
           });

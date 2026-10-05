@@ -3,8 +3,7 @@
 __pycache__/
 *.pyc
 
-# Data
-data/
+
 
 # Viva preparation
 viva_questions.md

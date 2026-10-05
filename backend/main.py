@@ -22,10 +22,10 @@ app.add_middleware(
 # Load Models at Startup
 try:
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    rf_model = joblib.load(os.path.join(BASE_DIR, "models", "rf_forecasting_model.pkl"))
-    anomaly_model = joblib.load(os.path.join(BASE_DIR, "models", "anomaly_model.pkl"))
-    feature_names = joblib.load(os.path.join(BASE_DIR, "models", "feature_names.pkl"))
-    historical_df = pd.read_csv(os.path.join(BASE_DIR, "data", "monthly_features.csv"))
+    rf_model = joblib.load(os.path.join(BASE_DIR, "model", "models", "rf_forecasting_model.pkl"))
+    anomaly_model = joblib.load(os.path.join(BASE_DIR, "model", "models", "anomaly_model.pkl"))
+    feature_names = joblib.load(os.path.join(BASE_DIR, "model", "models", "feature_names.pkl"))
+    historical_df = pd.read_csv(os.path.join(BASE_DIR, "model", "data", "monthly_features.csv"))
     latest_data = historical_df.iloc[-1].to_dict()
 except Exception as e:
     print(f"Error loading models or data: {e}")

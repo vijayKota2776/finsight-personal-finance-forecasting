@@ -66,6 +66,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </aside>
+        )}
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col h-screen overflow-hidden">

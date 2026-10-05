@@ -22,6 +22,39 @@ export default function ForecastPage() {
 
   const fetchHistoricalData = async () => {
     try {
+      const stored = localStorage.getItem("finsight_transactions");
+      if (stored) {
+        const txns = JSON.parse(stored);
+        
+        // Group debit transactions by month
+        const monthlyTotals = {};
+        
+        // Process chronologically (assume transactions array is newest first, so we reverse it)
+        const sortedTxns = [...txns].sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        sortedTxns.forEach(t => {
+          if (t.type === 'debit') {
+            const dateObj = new Date(t.date);
+            const monthYear = dateObj.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+            if (!monthlyTotals[monthYear]) {
+              monthlyTotals[monthYear] = 0;
+            }
+            monthlyTotals[monthYear] += t.amount;
+          }
+        });
+        
+        const formattedData = Object.keys(monthlyTotals).map(key => ({
+          year_month: key,
+          expense: monthlyTotals[key]
+        }));
+        
+        if (formattedData.length > 0) {
+           setHistoricalData(formattedData);
+           return;
+        }
+      }
+      
+      // Fallback to generic API data if no local transactions exist yet
       const res = await fetch("http://localhost:8000/api/historical");
       const data = await res.json();
       setHistoricalData(data);

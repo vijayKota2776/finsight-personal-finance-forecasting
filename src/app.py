@@ -126,10 +126,21 @@ input_df = pd.DataFrame([input_dict])
 st.markdown('<h1 class="header-style">FinSight Intelligence</h1>', unsafe_allow_html=True)
 st.markdown("Your Explainable Machine Learning Personal Finance Forecaster.")
 
+# 0. Historical Analysis (EDA)
+with st.expander("📊 View Historical Financial Trends", expanded=False):
+    st.markdown("Analyze your past Income vs. Expenses over time.")
+    # Prepare data for plotting
+    chart_data = historical_df[['year_month', 'income', 'expense']].copy()
+    # Convert period or string to just string for chart rendering
+    chart_data['year_month'] = chart_data['year_month'].astype(str)
+    chart_data.set_index('year_month', inplace=True)
+    st.line_chart(chart_data, color=["#10b981", "#ef4444"])
+
+st.markdown("---")
+
 # 1. Prediction Section
 st.markdown("### 🔮 Next Month's Expense Forecast")
 col1, col2, col3 = st.columns(3)
-
 prediction = model.predict(input_df)[0]
 # To simulate a prediction interval, we use the model's tree variance (heuristic for Random Forest)
 preds = np.stack([tree.predict(input_df) for tree in model.estimators_])

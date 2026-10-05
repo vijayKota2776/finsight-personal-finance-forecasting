@@ -2247,30 +2247,30 @@ Monitoring
 
 The project will be considered complete when:
 
-* [ ] Problem is formally defined
-* [ ] Dataset source is documented
-* [ ] Dataset quality is analyzed
-* [ ] Data cleaning is implemented
-* [ ] EDA is completed
-* [ ] Feature engineering is implemented
-* [ ] Baseline model is created
-* [ ] Multiple ML models are trained
-* [ ] Time-aware evaluation is performed
-* [ ] MAE is calculated
-* [ ] RMSE is calculated
-* [ ] R² is calculated
-* [ ] Final model is selected
-* [ ] Error analysis is completed
-* [ ] Explainability is implemented
-* [ ] Anomaly detection is implemented
-* [ ] What-if simulator is implemented
-* [ ] Prediction uncertainty is implemented
-* [ ] Streamlit application is functional
-* [ ] Application is tested
-* [ ] README is complete
-* [ ] Final report is complete
-* [ ] Presentation is prepared
-* [ ] Viva questions are prepared
+* [x] Problem is formally defined
+* [x] Dataset source is documented
+* [x] Dataset quality is analyzed
+* [x] Data cleaning is implemented
+* [x] EDA is completed
+* [x] Feature engineering is implemented
+* [x] Baseline model is created
+* [x] Multiple ML models are trained
+* [x] Time-aware evaluation is performed
+* [x] MAE is calculated
+* [x] RMSE is calculated
+* [x] R² is calculated
+* [x] Final model is selected
+* [x] Error analysis is completed
+* [x] Explainability is implemented
+* [x] Anomaly detection is implemented
+* [x] What-if simulator is implemented
+* [x] Prediction uncertainty is implemented
+* [x] Streamlit application is functional
+* [x] Application is tested
+* [x] README is complete
+* [x] Final report is complete
+* [x] Presentation is prepared
+* [x] Viva questions are prepared
 
 ---
 

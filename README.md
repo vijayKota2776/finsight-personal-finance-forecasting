@@ -1,47 +1,55 @@
 # 💰 FinSight — Personal Finance Forecasting & Financial Intelligence Platform
 
-> **An explainable machine-learning personal finance platform for transaction intelligence, budgeting, financial habit analysis, anomaly detection, expense forecasting, and what-if financial simulation.**
+> **An explainable machine-learning personal finance platform for expense forecasting, financial analytics, anomaly detection, and what-if financial simulation.**
+
+[![Frontend](https://img.shields.io/badge/Frontend-Next.js-black)](https://nextjs.org/)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)](https://fastapi.tiangolo.com/)
+[![ML](https://img.shields.io/badge/ML-Scikit--learn-orange)](https://scikit-learn.org/)
+[![Explainability](https://img.shields.io/badge/Explainability-SHAP-blue)](https://shap.readthedocs.io/)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-Academic%20Project-lightgrey)](#)
 
 ---
 
-## 🌐 Live Deployments
+# 🌐 Live Deployments
 
-* **FinSight Frontend (React/Next.js):** [https://finsight-personal-finance-forecasti.vercel.app/](https://finsight-personal-finance-forecasti.vercel.app/)
-* **FinSight Backend (FastAPI):** [https://finsight-backend-48d8.onrender.com](https://finsight-backend-48d8.onrender.com)
-* **Streamlit Academic Model:** [https://finsight-personal-finance-forecastinggit-3ssglvr2mo9rjqquujx5k.streamlit.app/](https://finsight-personal-finance-forecastinggit-3ssglvr2mo9rjqquujx5k.streamlit.app/)
+* **FinSight Frontend:** https://finsight-personal-finance-forecasti.vercel.app/
+* **FinSight Backend:** https://finsight-backend-48d8.onrender.com
+* **Streamlit Academic Application:** https://finsight-personal-finance-forecastinggit-3ssglvr2mo9rjqquujx5k.streamlit.app/
 
 ---
-## 📌 Project Overview
 
-**FinSight** is a full-stack personal finance intelligence prototype designed to help users understand their financial behavior, manage monthly budgets, detect unusual spending, and predict future expenses using machine learning.
+# 📌 Project Overview
+
+**FinSight** is a full-stack personal finance intelligence prototype developed around a machine-learning forecasting problem.
+
+The core academic problem is:
+
+> **Predict a user's total expenses for the next month using historical financial information.**
 
 The project combines:
 
-* Financial data ingestion
-* Mock bank-account connection
-* Consent-based account linking simulation
-* Transaction processing
-* Automatic transaction categorization
-* Budget management
-* Spending habit analysis
-* Recurring expense detection
-* Financial analytics
-* Machine-learning forecasting
-* Explainable AI
+* Financial transaction data
+* Data cleaning and preprocessing
+* Monthly financial aggregation
+* Feature engineering
+* Time-aware validation
+* Machine-learning model comparison
+* Expense forecasting
 * Anomaly detection
-* Prediction uncertainty
+* Explainable AI
+* Prediction uncertainty estimation
 * What-if financial simulation
-* Personalized financial insights
+* FastAPI model serving
+* Next.js/React frontend
+* Streamlit academic interface
+* Mock bank/account-aggregator-style onboarding
 
-The core academic ML problem remains:
-
-> **Predict a user's total expenses for the next month.**
-
-However, FinSight is designed as a complete financial intelligence product rather than a simple machine-learning prediction script.
+The project is intentionally designed as more than a standalone ML notebook. The machine-learning model forms the academic core, while the surrounding application demonstrates how the model could be integrated into a real financial product.
 
 ---
 
-# 🎯 Project Title
+# 🎯 Academic Project Title
 
 ## Personal Finance Forecasting Using Explainable Machine Learning
 
@@ -53,113 +61,195 @@ However, FinSight is designed as a complete financial intelligence product rathe
 
 > **FinSight — Personal Finance Forecasting & Financial Intelligence Platform**
 
-The academic title emphasizes the machine-learning component, while **FinSight** is the name of the actual application.
+The academic title focuses on the machine-learning problem, while **FinSight** represents the complete application and product concept.
 
 ---
 
-# 🚀 What We Are Building
+# 🧠 Problem Statement
 
-FinSight is designed around a simple idea:
+Personal financial data contains useful patterns related to:
 
-> **Connect → Understand → Analyze → Predict → Plan → Improve**
+* income,
+* expenses,
+* spending categories,
+* savings,
+* previous spending,
+* financial ratios,
+* and historical trends.
 
-The user first connects a financial account through a **mock Account Aggregator-style banking flow**.
+However, users generally see historical information without knowing how their spending may behave in the following month.
 
-The prototype then:
+FinSight addresses this by using historical financial information to estimate:
 
-1. Discovers mock financial accounts.
-2. Lets the user select an account.
-3. Shows a consent request.
-4. Simulates bank authentication.
-5. Fetches the user's previous three months of transaction data.
-6. Processes and categorizes transactions.
-7. Builds the user's financial profile.
-8. Allows the user to set a monthly budget.
-9. Analyzes spending habits.
-10. Detects recurring expenses.
-11. Detects unusual spending.
-12. Forecasts next month's expenses.
-13. Explains the forecast.
-14. Allows what-if financial scenarios.
-15. Generates financial insights and alerts.
+> **The user's total expense for the next month.**
+
+The system also provides additional intelligence around the prediction, including anomaly detection, feature importance, and what-if scenarios.
 
 ---
 
-# 🧠 Core Product Philosophy
+# 🤖 Machine Learning Problem Definition
 
-FinSight should not feel like:
-
-> "A Python program that predicts expenses."
-
-It should feel like:
-
-> **"A personal financial intelligence platform powered by explainable machine learning."**
-
-The ML model is the academic core.
-
-The surrounding application turns that model into a useful financial product.
-
----
-
-# 🏗️ High-Level Architecture
+The problem is formulated as:
 
 ```text
-                         ┌───────────────────────┐
-                         │        USER           │
-                         └───────────┬───────────┘
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │  Next.js / React UI   │
-                         └───────────┬───────────┘
-                                     │
-                              REST API / JSON
-                                     │
-                                     ▼
-                         ┌───────────────────────┐
-                         │     FastAPI Backend   │
-                         └───────────┬───────────┘
-                                     │
-              ┌──────────────────────┼──────────────────────┐
-              │                      │                      │
-              ▼                      ▼                      ▼
-       Authentication        Financial Data          ML Services
-              │                      │                      │
-              │                      │              ┌───────┼────────┐
-              │                      │              │       │        │
-              │                      │              ▼       ▼        ▼
-              │                      │          Forecast  Anomaly  Explain
-              │                      │
-              │                      ▼
-              │               Transaction Engine
-              │                      │
-              │          ┌───────────┼────────────┐
-              │          ▼           ▼            ▼
-              │      Categories   Budgets     Recurring
-              │                                  Expenses
-              │
-              └──────────────────────┐
-                                     ▼
-                              Financial Database
+Supervised Learning
+        ↓
+Regression
+        ↓
+Time-Series Forecasting
 ```
 
+## Target Variable
+
+```text
+target_expense
+```
+
+The target represents the total expense for the following month.
+
+### Example
+
+```text
+January Financial Data
+        +
+February Financial Data
+        ↓
+Predict March Expense
+```
+
+The forecasting pipeline uses only information that would have been available at prediction time.
+
 ---
 
-# 🔐 Important Banking Architecture
+# 🔬 Why This Is a Machine-Learning Problem
 
-## Prototype Only
+Given historical financial observations:
 
-FinSight does **not** directly connect to real bank accounts in the academic prototype.
+```text
+Income
+Expenses
+Categories
+Savings
+Previous Expense
+Previous Income
+Financial Ratios
+Rolling Averages
+Growth Rates
+Time Features
+```
 
-Instead, it implements a **mock banking connection flow** inspired by India's consent-based Account Aggregator ecosystem.
+the model learns relationships between historical financial behavior and the following month's total expenses.
 
-The purpose is to demonstrate what the production user experience could look like without handling real banking credentials or sensitive financial authentication.
+The objective is not to reproduce the current month's expense directly, but to estimate future expense behavior.
 
 ---
 
-# 🏦 Mock Bank Connection Flow
+# ⭐ Main Features
 
-The intended user experience is:
+## Implemented / Demonstrated
+
+The current project includes the following major technical components:
+
+* Expense forecasting
+* Random Forest regression
+* Baseline model comparison
+* Linear Regression comparison
+* Gradient Boosting comparison
+* TimeSeriesSplit validation
+* Feature engineering
+* Leakage-aware preprocessing
+* Isolation Forest anomaly detection
+* SHAP-based explainability
+* Estimated model uncertainty range
+* What-if forecasting
+* FastAPI prediction API
+* Next.js/React frontend
+* Mock financial account onboarding
+* Mock consent flow
+* Mock transaction synchronization
+* Streamlit academic interface
+* Automated tests
+
+## Product Prototype Features
+
+The application also demonstrates:
+
+* Authentication UI
+* Financial dashboard
+* Transaction visualization
+* Account connection experience
+* Budget-oriented financial views
+* Spending analytics
+* Forecast visualization
+* Financial insights
+* What-if scenario simulation
+
+Some of these product features are prototype/demo functionality rather than production financial infrastructure.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                         USER
+                           │
+                           ▼
+                ┌────────────────────┐
+                │   Next.js / React  │
+                │     Frontend       │
+                └─────────┬──────────┘
+                          │
+                     REST / JSON
+                          │
+                          ▼
+                ┌────────────────────┐
+                │      FastAPI       │
+                │      Backend       │
+                └─────────┬──────────┘
+                          │
+              ┌───────────┼────────────┐
+              │           │            │
+              ▼           ▼            ▼
+        Financial     Forecasting   Anomaly
+        Services       Service      Detection
+              │           │            │
+              │           ▼            ▼
+              │      ML Models    Isolation Forest
+              │
+              ▼
+        Transaction Data
+              │
+              ▼
+       Feature Engineering
+              │
+              ▼
+        Financial Dataset
+```
+
+The project also contains a separate academic Streamlit layer used to demonstrate the machine-learning workflow.
+
+---
+
+# 🏦 Mock Banking Architecture
+
+## Important
+
+FinSight **does not connect to real bank accounts**.
+
+The banking experience is a simulated Account Aggregator-style flow intended to demonstrate the product experience without handling real banking credentials.
+
+The prototype must never request or store:
+
+* Bank passwords
+* UPI PINs
+* Real OTPs
+* Debit card credentials
+* Credit card credentials
+* Real banking authentication credentials
+
+---
+
+# 🔄 Mock Bank Flow
 
 ```text
 Login
@@ -170,966 +260,130 @@ Enter Mobile Number
   ↓
 Discover Mock Accounts
   ↓
-Select Bank Account
+Select Account
   ↓
-Review Data Consent
+Review Consent
   ↓
 Approve Consent
   ↓
-Mock Bank Authentication
+Mock Authentication
   ↓
-Bank Data Sharing Approval
+Mock Data Sharing Approval
   ↓
-Fetch Previous 3 Months
+Fetch Transactions
   ↓
 Transaction Processing
   ↓
 Dashboard
 ```
 
----
-
-## Example
-
-### Step 1 — Connect Bank
+Example mock accounts include:
 
 ```text
-┌─────────────────────────────────────────┐
-│           Connect Your Bank              │
-│                                         │
-│ Connect your financial account to        │
-│ automatically understand your spending.  │
-│                                         │
-│        [ Connect Bank Account ]          │
-└─────────────────────────────────────────┘
-```
-
----
-
-### Step 2 — Mobile Number
-
-```text
-Find Your Financial Accounts
-
-Mobile Number
-
-+91 98XXXXXX42
-
-[ Continue ]
-```
-
-The prototype uses the mobile number to simulate account discovery.
-
----
-
-### Step 3 — Account Discovery
-
-```text
-Accounts Found
-
-○ HDFC Bank
-  Savings Account
-  XXXX 4821
-
-○ ICICI Bank
-  Savings Account
-  XXXX 9182
-
-○ State Bank of India
-  Savings Account
-  XXXX 2214
-
-[ Continue ]
-```
-
----
-
-### Step 4 — Consent
-
-```text
-Financial Data Consent
-
-FinSight is requesting:
-
-✓ Account information
-✓ Transaction history
-✓ Transaction dates
-✓ Transaction amounts
-✓ Transaction descriptions
-
-Purpose:
-Personal financial analysis and
-expense forecasting.
-
-Data period:
-Last 3 months
-
-[ Approve ]
-[ Decline ]
-```
-
----
-
-### Step 5 — Mock Authentication
-
-```text
-Connecting to HDFC Bank...
-
-✓ Account discovered
-✓ User authenticated
-✓ Consent verified
-✓ Data access approved
-✓ Fetching transactions...
-```
-
----
-
-### Step 6 — Data Import
-
-```text
-Financial Data Imported
-
-Transactions: 1,284
-
-Period:
-01 July 2026 → 05 October 2026
-
-Accounts:
-2
-
-[ Continue ]
-```
-
----
-
-# 🔒 Banking Security Principle
-
-The prototype must never request or store:
-
-* Bank passwords
-* Bank PINs
-* UPI PINs
-* OTPs
-* Debit card credentials
-* Credit card credentials
-* Real banking authentication credentials
-
-The mock connection exists only to demonstrate the intended product workflow.
-
----
-
-# 🎯 Primary ML Problem
-
-Given historical financial information:
-
-```text
-Income
-Expenses
-Categories
-Savings
-Account balance
-Previous spending
-Recurring expenses
-Time-related features
-```
-
-predict:
-
-> **The user's total expense for the next month.**
-
----
-
-# 🤖 Machine Learning Problem Type
-
-```text
-Supervised Learning
-        ↓
-Regression
-        ↓
-Time-Series Forecasting
-```
-
-The target variable is:
-
-```text
-target_expense
-```
-
-Example:
-
-```text
-Historical data
-      ↓
-January + February
-      ↓
-Predict March expense
-```
-
----
-
-# 🌟 Core Application Features
-
-FinSight consists of the following major product modules.
-
----
-
-## 1. 🔐 Authentication
-
-Users can:
-
-* Create an account
-* Log in
-* Log out
-* Maintain a session
-* Access their financial dashboard
-
-Future production functionality may include:
-
-* Google authentication
-* Phone authentication
-* Two-factor authentication
-* Device/session management
-
----
-
-# 2. 🏦 Connected Accounts
-
-Users can view their connected financial accounts.
-
-Example:
-
-```text
-CONNECTED ACCOUNTS
-
 HDFC Bank
 Savings Account
 XXXX 4821
 
-Balance:
-₹84,500
+ICICI Bank
+Savings Account
+XXXX 9182
 
-Status:
-✓ Connected
+State Bank of India
+Savings Account
+XXXX 2214
 ```
 
-Users should also be able to:
-
-* View connected accounts
-* View account balances
-* View connection status
-* Disconnect accounts
-* Review consent status
+These are simulated accounts only.
 
 ---
 
-# 3. 💳 Transaction Management
+# ⚠️ Mock Banking Limitation
 
-Transactions are one of the most important parts of the platform.
+The mock banking layer and academic ML dataset are currently **separate components**.
 
-Example:
-
-```text
-Date       Merchant       Category       Amount
----------------------------------------------------
-05 Oct     Swiggy         Food            -₹650
-04 Oct     Uber           Transport       -₹320
-03 Oct     Amazon         Shopping       -₹2,450
-01 Oct     Salary         Income         +₹75,000
-```
-
-Users can:
-
-* Search transactions
-* Filter transactions
-* View transaction details
-* Filter by category
-* Filter by income/expense
-* Filter by date
-* Correct categories
-* Review unusual transactions
-
----
-
-# 4. 🏷️ Transaction Categorization
-
-FinSight automatically categorizes transactions.
-
-Example:
-
-```text
-Swiggy
-   ↓
-Food
-
-Uber
-   ↓
-Transport
-
-Amazon
-   ↓
-Shopping
-
-Netflix
-   ↓
-Entertainment
-
-Electricity Board
-   ↓
-Utilities
-```
-
-The prototype can initially use:
-
-* Merchant mapping
-* Keyword matching
-* Rule-based classification
-
-A future version can use:
-
-* NLP
-* ML classification
-* User-specific learning
-
----
-
-# 5. 📊 Dashboard
-
-The dashboard is the primary financial overview.
-
-It should show:
-
-### Financial Summary
-
-```text
-Balance
-Income
-Expenses
-Savings
-Savings Rate
-```
-
-### Budget
-
-```text
-Monthly Budget
-Actual Spending
-Remaining Budget
-Budget Variance
-```
-
-### Forecast
-
-```text
-Next Month Forecast
-Prediction Range
-Expected Change
-```
-
-### Financial Health
-
-```text
-Financial Health Score
-```
-
-### Insights
-
-```text
-Spending Alerts
-Habit Insights
-Forecast Warnings
-Anomalies
-```
-
-### Recent Transactions
-
-Display the latest 5–10 transactions.
-
-The dashboard should not display every transaction permanently. Instead:
-
-```text
-Recent Transactions
-
-[ View All Transactions ]
-```
-
-opens the complete transaction page.
-
----
-
-# 6. 💰 Monthly Budget Management
-
-At the beginning of each month, users can create a budget.
-
-Example:
-
-```text
-OCTOBER BUDGET
-
-Monthly Income
-₹75,000
-
-Target Spending
-₹45,000
-
-Savings Target
-₹30,000
-```
-
-Category budgets:
-
-```text
-Food             ₹8,000
-Transport        ₹5,000
-Shopping         ₹6,000
-Entertainment    ₹3,000
-Utilities        ₹4,000
-Other            ₹4,000
-```
-
----
-
-# 7. 📈 Budget Tracking
-
-FinSight continuously compares:
-
-```text
-Budget
-vs
-Actual Spending
-```
-
-Example:
-
-```text
-FOOD
-
-₹6,820 / ₹8,000
-
-████████████████░░░░
-
-85% Used
-
-⚠ Spending faster than usual
-```
-
-Possible states:
-
-```text
-✓ On Track
-⚠ Approaching Limit
-🔴 Over Budget
-```
-
----
-
-# 8. 🧠 Financial Habit Analysis
-
-FinSight analyzes how users behave financially.
-
-Examples:
-
-```text
-Food
-High frequency
-
-Shopping
-Weekend-heavy
-
-Transport
-Increasing
-
-Entertainment
-Stable
-
-Savings
-Strong
-```
-
-Potential insights:
-
-> Your weekend spending is 41% higher than your weekday spending.
-
-> Food spending has increased for three consecutive months.
-
-> Your average spending during the final week of the month is higher than your monthly average.
-
----
-
-# 9. 🔄 Recurring Expense Detection
-
-FinSight identifies repeated financial obligations.
-
-Example:
-
-```text
-RECURRING EXPENSES
-
-Rent
-₹20,000 / month
-
-Netflix
-₹649 / month
-
-Internet
-₹999 / month
-
-Insurance
-₹2,500 / month
-```
-
-Recurring expenses can become features in the forecasting model.
-
----
-
-# 10. 📅 Upcoming Expense Detection
-
-Based on recurring historical patterns:
-
-```text
-UPCOMING EXPECTED EXPENSES
-
-Rent
-Expected: 1 Nov
-₹20,000
-
-Netflix
-Expected: 5 Nov
-₹649
-
-Internet
-Expected: 8 Nov
-₹999
-```
-
-These values can also contribute to financial planning.
-
----
-
-# 11. 🔮 Expense Forecasting
-
-This is the main ML functionality.
-
-Example:
-
-```text
-NEXT MONTH FORECAST
-
-₹51,240
-
-Expected Range
-
-₹47,800 — ₹55,100
-
-Compared with Current Month
-
-↑ 6.3%
-```
-
-The forecast should not be presented as a guaranteed result.
-
-It is a model-based estimate.
-
----
-
-# 12. 🧠 Explainable Forecast
-
-FinSight should answer:
-
-> **Why does the model expect this amount?**
-
-Example:
-
-```text
-WHY?
-
-Previous Month Expense     +₹3,900
-Recurring Expenses         +₹2,100
-Food Trend                 +₹1,200
-Transport Trend              +₹700
-Shopping Trend              -₹450
-```
-
-Potential techniques:
-
-```text
-SHAP
-Feature Importance
-Permutation Importance
-```
-
----
-
-# 13. 🚨 Anomaly Detection
-
-The system identifies unusual spending.
-
-Example:
-
-```text
-⚠ UNUSUAL TRANSACTION
-
-Amazon
-
-Amount:
-₹42,000
-
-Normal Shopping Range:
-₹1,000 – ₹8,000
-
-Status:
-Highly Unusual
-```
-
-Possible methods:
-
-```text
-Isolation Forest
-IQR
-Z-score
-```
-
-The final method will be selected based on experimentation.
-
----
-
-# 14. 🎛️ What-If Financial Simulator
-
-Users can change financial assumptions and immediately see how the forecast changes.
-
-Example:
-
-```text
-Current Shopping:
-₹8,000
-
-Scenario Shopping:
-₹5,500
-```
-
-Result:
-
-```text
-CURRENT FORECAST
-
-₹51,240
-
-SCENARIO FORECAST
-
-₹48,920
-
-Potential Reduction
-
-₹2,320
-```
-
-Possible scenarios:
-
-### Scenario A
-
-Normal spending
-
-### Scenario B
-
-Reduce discretionary spending
-
-### Scenario C
-
-Increase income
-
-### Scenario D
-
-Unexpected expense
-
-### Scenario E
-
-Increase savings target
-
-All outputs must be clearly labeled as:
-
-> **Model-based scenario estimates, not guaranteed financial outcomes.**
-
----
-
-# 15. 📏 Prediction Uncertainty
-
-FinSight should provide a range rather than pretending the forecast is exact.
-
-Example:
-
-```text
-Point Forecast
-
-₹51,240
-
-Prediction Range
-
-₹47,800 — ₹55,100
-```
-
-Potential techniques:
-
-* Bootstrap prediction intervals
-* Residual-based intervals
-* Quantile regression
-* Conformal prediction
-
-The final technique will be selected during implementation.
-
----
-
-# 16. ❤️ Financial Health Score
-
-FinSight can calculate a project-defined financial health indicator.
-
-Possible components:
-
-```text
-Savings Rate
-Expense-to-Income Ratio
-Spending Volatility
-Recurring Expense Ratio
-Budget Adherence
-Expense Growth
-```
-
-Example:
-
-```text
-FINANCIAL HEALTH
-
-82 / 100
-
-GOOD
-```
-
-This is an analytical project metric.
-
-It must not be presented as professional financial advice or a regulated financial score.
-
----
-
-# 17. 🔔 Financial Alerts
-
-FinSight can generate alerts such as:
-
-### Budget Alert
-
-> Food spending has reached 85% of your monthly budget.
-
-### Forecast Alert
-
-> Next month's predicted expenses are 6.3% higher than this month.
-
-### Anomaly Alert
-
-> An unusually large shopping transaction was detected.
-
-### Habit Alert
-
-> Weekend spending is significantly higher than weekday spending.
-
-### Savings Alert
-
-> You are currently on track to achieve your monthly savings target.
-
----
-
-# 18. 📑 Monthly Financial Report
-
-At the end of a month, FinSight can summarize:
-
-```text
-OCTOBER FINANCIAL REPORT
-
-Income                  ₹75,000
-Expenses                ₹48,200
-Savings                 ₹26,800
-Savings Rate              35.7%
-
-Budget                  ₹45,000
-Actual Spending         ₹48,200
-
-Budget Variance          +₹3,200
-```
-
-### Highlights
-
-```text
-✓ Savings remained strong
-⚠ Food spending increased 18%
-⚠ Shopping exceeded budget
-✓ Transport spending decreased 6%
-🔮 November forecast: ₹51,240
-```
-
----
-
-# 📊 Analytics Module
-
-FinSight should provide historical financial analysis.
-
-## Monthly Expense Trend
-
-Line chart showing monthly spending.
-
-## Income vs Expense
-
-Compare monthly income with expenses.
-
-## Category Spending
-
-Show:
-
-```text
-Food
-Transport
-Shopping
-Bills
-Entertainment
-Healthcare
-Other
-```
-
-## Savings Trend
-
-Track savings over time.
-
-## Spending Volatility
-
-Identify stable vs unstable categories.
-
-## Monthly Comparison
-
-Compare:
-
-```text
-Current Month
-vs
-Previous Month
-```
-
----
-
-# 📚 Academic EDA
-
-The academic analysis should answer:
-
-### Financial Trends
-
-* How does spending change over time?
-* Does income affect spending?
-* Is savings increasing?
-* Is expense growth accelerating?
-
-### Category Behavior
-
-* Which categories consume the most money?
-* Which categories are most volatile?
-* Which categories are increasing?
-
-### Time Patterns
-
-* Are there seasonal patterns?
-* Are particular months more expensive?
-* Is spending higher on weekends?
-* Does spending increase toward the end of a month?
-
----
-
-# 📦 Data Pipeline
-
-The system uses two different data paths.
-
-## Prototype Financial Data Flow
+### Product/demo flow
 
 ```text
 Mock Bank
-   ↓
-Mock Account Connection
-   ↓
-Mock Consent
-   ↓
-Transaction Dataset
-   ↓
-Data Validation
-   ↓
-Cleaning
-   ↓
-Categorization
-   ↓
-Recurring Detection
-   ↓
-Financial Database
+     ↓
+Mock Transactions
+     ↓
+Frontend
+     ↓
+Dashboard
 ```
 
-## ML Data Flow
+### Academic ML flow
 
 ```text
-Financial Database
-        ↓
-Transaction Aggregation
-        ↓
-Monthly Financial Dataset
-        ↓
-Feature Engineering
-        ↓
-Time-Aware Split
-        ↓
-Model Training
-        ↓
-Evaluation
-        ↓
-Model Selection
-        ↓
-Forecast API
+Financial Dataset
+     ↓
+Preprocessing
+     ↓
+Monthly Features
+     ↓
+Trained ML Model
+     ↓
+FastAPI
+     ↓
+Forecast UI
 ```
+
+The current prototype should therefore **not be described as training or retraining the forecasting model directly from newly synchronized mock-bank transactions**.
+
+A future production architecture can connect these two pipelines.
 
 ---
 
-# 🧹 Data Cleaning
+# 📊 Dataset
 
-The system investigates:
+The project uses a financial transaction dataset containing transaction-level observations.
 
-## Missing Values
-
-Possible strategies:
-
-* Median imputation
-* Forward filling
-* Backward filling
-* Domain-based replacement
-* Removing rows when justified
-
-## Duplicate Transactions
-
-Duplicate records should be detected and resolved.
-
-## Invalid Values
-
-Examples:
+The dataset contains fields representing information such as:
 
 ```text
-Impossible dates
-Invalid transaction amounts
-Invalid transaction types
-Invalid categories
+Date
+Transaction Description
+Category
+Amount
+Type
 ```
 
-## Outliers
+The transaction data is transformed into monthly financial observations for forecasting.
 
-Outliers must be investigated rather than automatically removed.
+The processed dataset contains approximately **58 usable monthly observations**, which is relatively small for a forecasting problem.
 
-A large transaction may be completely legitimate.
+This is an important limitation when interpreting model performance.
 
-Therefore:
+---
 
-> **Outlier ≠ automatically incorrect data.**
+# 🧹 Data Preprocessing
+
+The preprocessing pipeline is implemented in:
+
+```text
+src/preprocessing.py
+```
+
+The pipeline performs tasks including:
+
+* Loading transaction data
+* Date processing
+* Income/expense separation
+* Monthly aggregation
+* Financial feature construction
+* Lag feature generation
+* Rolling feature generation
+* Growth-rate calculations
+* Financial ratio calculations
+* Target creation
+* Leakage prevention
 
 ---
 
 # 🧮 Feature Engineering
 
-The ML system will generate features such as:
+The forecasting dataset contains historical financial features.
 
 ## Lag Features
 
@@ -1171,20 +425,15 @@ quarter
 year
 ```
 
-Potential cyclical encoding:
-
-```text
-sin(month)
-cos(month)
-```
+Category-level financial variables are also incorporated where available.
 
 ---
 
-# 🚨 Preventing Data Leakage
+# 🚨 Data Leakage Prevention
 
-This is a critical requirement.
+Time-series forecasting requires strict prevention of future information entering the training features.
 
-When predicting March:
+For example, when predicting March:
 
 ```text
 Allowed:
@@ -1193,7 +442,7 @@ January
 February
 ```
 
-Not allowed:
+Future observations such as:
 
 ```text
 April
@@ -1201,65 +450,137 @@ May
 June
 ```
 
-All lag and rolling features must use only information available at prediction time.
+must not be used to construct the March prediction.
+
+The preprocessing pipeline uses historical lag and rolling features to ensure that the target month is not used as an input feature.
 
 ---
 
-# 🧪 Machine Learning Models
+# 📚 Exploratory Data Analysis
 
-The current implementation uses a **Random Forest** as the primary forecasting model.
-
-Model experimentation can include:
-
-## Baseline
+The academic EDA is implemented in:
 
 ```text
-Previous Month Expense
+notebooks/01_eda.ipynb
 ```
 
-## Linear Regression
+The current analysis includes:
 
-Provides an interpretable linear baseline.
+* Monthly expense trends
+* Category distribution
+* Correlation analysis
 
-## Random Forest Regressor
+The EDA is intended to investigate:
 
-Captures:
+### Financial Trends
+
+* How expenses change over time
+* Income versus expenses
+* Savings behavior
+* Expense growth
+
+### Category Behavior
+
+* Highest-spending categories
+* Category contribution
+* Category relationships
+
+### Time Patterns
+
+* Monthly spending behavior
+* Potential seasonal patterns
+* Changes in spending over time
+
+Because the dataset contains relatively few monthly observations, strong seasonal conclusions should not be claimed without sufficient evidence.
+
+---
+
+# 🤖 Machine Learning Models
+
+The project compares multiple forecasting approaches.
+
+## 1. Naive Baseline
+
+The baseline predicts:
+
+```text
+Next Month Expense
+=
+Current Month Expense
+```
+
+This establishes a minimum benchmark.
+
+---
+
+## 2. Linear Regression
+
+Linear Regression provides a simple and interpretable regression model.
+
+It is useful as a comparison against nonlinear models.
+
+---
+
+## 3. Random Forest Regressor
+
+Random Forest is the current selected forecasting model.
+
+It can capture:
 
 * Nonlinear relationships
 * Feature interactions
-* Complex financial behavior
-
-## Gradient Boosting
-
-Provides another strong tree-based regression comparison.
-
-## Optional Models
-
-If the dataset supports them:
-
-```text
-ARIMA
-SARIMA
-XGBoost
-```
+* Complex relationships between financial variables
 
 ---
 
-# 🧪 Model Comparison
+## 4. Gradient Boosting Regressor
 
-The project should compare models using:
+Gradient Boosting provides another tree-based regression comparison.
 
-| Model                   | MAE | RMSE | R² |
-| ----------------------- | --: | ---: | -: |
-| Previous Month Baseline |   — |    — |  — |
-| Linear Regression       |   — |    — |  — |
-| Random Forest           |   — |    — |  — |
-| Gradient Boosting       |   — |    — |  — |
-| Optional ARIMA          |   — |    — |  — |
+---
 
-Actual values must come from experiments.
+# 📈 Model Comparison Results
 
-**No performance numbers should be fabricated.**
+The current experiments produced the following results:
+
+| Model             |         MAE |        RMSE |      R² |
+| ----------------- | ----------: | ----------: | ------: |
+| Naive Baseline    |     5258.21 |     6265.45 | -1.1142 |
+| Linear Regression |     7210.77 |     8692.85 | -4.4774 |
+| Random Forest     | **4673.99** | **5750.58** | -0.6321 |
+| Gradient Boosting |     5171.12 |     6302.40 | -0.9520 |
+
+---
+
+# 🏆 Model Selection
+
+Random Forest achieved the best performance among the tested models.
+
+Compared with the naive baseline:
+
+```text
+Baseline MAE:
+₹5,258.21
+
+Random Forest MAE:
+₹4,673.99
+```
+
+This represents an improvement of approximately:
+
+```text
+11%
+```
+
+in MAE.
+
+However, all tested models produced negative R² values.
+
+Therefore, the correct academic conclusion is:
+
+> **Random Forest achieved the best validation performance among the tested models and improved the naive baseline by approximately 11% in MAE. However, all models produced negative R² values, indicating limited predictive signal and modest forecasting performance. Random Forest was selected because it performed best among the tested approaches.**
+
+The project does **not** claim that the model provides highly accurate real-world financial forecasting.
 
 ---
 
@@ -1267,131 +588,281 @@ Actual values must come from experiments.
 
 ## MAE
 
-Mean Absolute Error.
+Mean Absolute Error measures the average absolute difference between predictions and actual expenses.
 
-Answers:
+```text
+MAE
+=
+Average |Actual - Prediction|
+```
+
+It can be interpreted as:
 
 > On average, how many rupees away is the prediction from the actual expense?
 
+---
+
 ## RMSE
 
-Root Mean Squared Error.
+Root Mean Squared Error gives greater weight to larger errors.
 
-Penalizes larger errors more heavily.
+```text
+RMSE
+=
+√Mean((Actual - Prediction)²)
+```
+
+This is useful for understanding the effect of large forecasting errors.
+
+---
 
 ## R²
 
-Measures the amount of variation explained by the model.
+R² measures how much variation in the target is explained by the model relative to the evaluation baseline.
+
+Negative values indicate that the model performs worse than the conventional mean-based reference for that evaluation setup.
 
 ---
 
 # ⏱️ Time-Aware Validation
 
-Random train/test splitting should not be the primary forecasting evaluation strategy.
+Random train/test splitting is inappropriate as the primary validation strategy for this forecasting problem because it can allow future observations to influence training.
 
-Use chronological evaluation.
-
-Example:
-
-```text
-2022 ─────────────── 2024 | 2025
-        TRAINING          TEST
-```
-
-For cross-validation:
+The project uses:
 
 ```text
 TimeSeriesSplit
 ```
 
-Example:
+Conceptually:
 
 ```text
 Fold 1
-Train → 2022
-Test  → early 2023
+
+TRAIN → Earlier Period
+TEST  → Later Period
+
 
 Fold 2
-Train → 2022 + early 2023
-Test  → late 2023
+
+TRAIN → Earlier Period + Fold 1 Test Period
+TEST  → Later Period
+
 
 Fold 3
-Train → 2022–2023
-Test  → 2024
+
+TRAIN → All Earlier Periods
+TEST  → Latest Period
+```
+
+This better reflects the real forecasting scenario.
+
+---
+
+# 🔍 Explainable AI
+
+FinSight uses **SHAP** for model explainability.
+
+The current implementation uses:
+
+```python
+explainer = shap.TreeExplainer(final_rf_model)
+shap_values = explainer.shap_values(X)
+```
+
+The resulting analysis provides global insight into which features influence the Random Forest model.
+
+A SHAP summary visualization is generated as part of the ML workflow.
+
+---
+
+# ⚠️ Explainability Limitation
+
+The current SHAP implementation primarily provides **global feature importance**.
+
+It should not be described as a complete local explanation for every individual prediction.
+
+A future enhancement could provide explanations such as:
+
+```text
+Why is this user's forecast higher?
+
+Previous expense trend     + contribution
+Food spending              + contribution
+Recurring expenses         + contribution
+Shopping trend             - contribution
 ```
 
 ---
 
-# 🤖 Current ML Implementation
+# 🚨 Anomaly Detection
 
-The current implementation contains:
-
-### Data Pipeline
+FinSight uses:
 
 ```text
-src/preprocessing.py
-```
-
-Responsible for:
-
-* Reading financial data
-* Cleaning data
-* Feature engineering
-* Time-series feature construction
-* Preventing future-data leakage
-
-The current feature engineering includes rolling and growth-based financial variables.
-
-### ML Engine
-
-```text
-src/train_model.py
-```
-
-Responsible for:
-
-* Training forecasting models
-* Evaluating models
-* Saving trained models
-* Expense forecasting
-* Anomaly detection
-
-Current important models:
-
-```text
-Random Forest
 Isolation Forest
 ```
 
----
+for unusual financial behavior detection.
 
-# 🚨 Isolation Forest
-
-The current ML engine uses **Isolation Forest** for unusual spending detection.
-
-This operates separately from the expense forecasting model.
+The anomaly model operates separately from the forecasting model.
 
 Conceptually:
 
 ```text
-Transaction Data
+Financial Features
        ↓
-Behavior Features
+Behavior Representation
        ↓
 Isolation Forest
        ↓
-Normal / Anomaly
+Normal / Anomalous
 ```
 
 ---
 
-# 🔌 Backend API
+# ⚠️ Anomaly Detection Scope
+
+The current anomaly detection implementation should be described as **financial behavior/monthly anomaly detection**, not as a production-grade transaction fraud detector.
+
+A future transaction-level anomaly model could incorporate:
+
+* transaction amount,
+* merchant,
+* category,
+* frequency,
+* time,
+* historical merchant behavior,
+* user-specific patterns.
+
+---
+
+# 🔮 Expense Forecasting
+
+The primary ML output is:
+
+```text
+Next Month Expense Forecast
+```
+
+Example interface:
+
+```text
+NEXT MONTH FORECAST
+
+₹51,240
+```
+
+The prediction is a model-based estimate and should never be interpreted as a guaranteed financial outcome.
+
+---
+
+# 📏 Prediction Uncertainty
+
+The backend estimates uncertainty using the dispersion of predictions generated by the Random Forest ensemble.
+
+Conceptually:
+
+```text
+Prediction
+     +
+Model Prediction Dispersion
+     ↓
+Estimated Uncertainty Range
+```
+
+The current implementation calculates an approximate range using the ensemble standard deviation.
+
+---
+
+# ⚠️ Important Uncertainty Disclaimer
+
+The displayed range should be described as:
+
+> **Estimated model uncertainty range based on ensemble prediction dispersion.**
+
+It should **not** currently be described as a statistically validated 95% prediction interval.
+
+Methods such as:
+
+* Bootstrap prediction intervals
+* Residual-based intervals
+* Quantile regression
+* Conformal prediction
+
+could be evaluated in future work.
+
+---
+
+# 🎛️ What-If Financial Simulator
+
+FinSight includes a what-if forecasting interface.
+
+Users can modify selected financial variables and observe how the model prediction changes.
+
+Example:
+
+```text
+Current Shopping:
+₹8,000
+
+Scenario Shopping:
+₹5,500
+```
+
+The system then compares:
+
+```text
+Current Forecast
+       vs
+Scenario Forecast
+```
+
+Example:
+
+```text
+Current Forecast:
+₹51,240
+
+Scenario Forecast:
+₹48,920
+
+Estimated Difference:
+₹2,320
+```
+
+These are:
+
+> **Model-based scenario estimates, not guaranteed financial outcomes.**
+
+---
+
+# 🧩 What-If Inputs
+
+The current frontend allows scenario changes for selected variables such as:
+
+```text
+Income
+Shopping
+Food / Dining
+Entertainment
+```
+
+Other financial variables may remain based on the historical feature values used by the model.
+
+This limitation should be considered when interpreting scenario results.
+
+---
+
+# 🌐 FastAPI Backend
 
 The backend is implemented using:
 
-# FastAPI
+```text
+FastAPI
+```
 
-Current backend entry point:
+Main entry point:
 
 ```text
 backend/main.py
@@ -1400,325 +871,207 @@ backend/main.py
 The backend is responsible for:
 
 * Loading trained ML models
-* Receiving financial data
-* Running predictions
+* Validating prediction inputs
+* Running forecasting
 * Running anomaly detection
-* Returning structured JSON responses
-* Serving the frontend with ML functionality
+* Returning structured JSON
+* Providing historical financial data
+* Connecting the ML layer to the frontend
 
 ---
 
-# 🌐 Frontend Application
+# 🔌 Backend Responsibilities
 
-The application frontend is implemented using:
-
-# Next.js + React
-
-The frontend provides the production-style SaaS interface.
-
-The original Streamlit prototype was replaced with this architecture.
-
----
-
-# 🖥️ Frontend Product Structure
-
-The application should contain:
+Conceptually:
 
 ```text
+Frontend
+   ↓
+FastAPI
+   ↓
+Validation
+   ↓
+ML Service
+   ↓
+Random Forest / Isolation Forest
+   ↓
+Prediction
+   ↓
+JSON Response
+```
+
+---
+
+# 🖥️ Frontend
+
+The main product interface is built using:
+
+```text
+Next.js
+React
+JavaScript
+```
+
+The frontend provides a production-style SaaS interface rather than exposing the user directly to the ML implementation.
+
+---
+
+# 🧭 Frontend Areas
+
+The current application architecture includes areas such as:
+
+```text
+Login
+Onboarding
 Dashboard
 Transactions
 Analytics
 Budget
 Forecast
-My Habits
-Alerts
 Accounts
-What-If Simulator
 Settings
+What-If
 ```
 
-The academic ML functionality can be surfaced under:
+The exact availability of individual product modules can evolve as development continues.
+
+The primary implemented ML-facing areas are:
 
 ```text
-Analytics
 Forecast
+What-If
+Analytics
 ```
-
-rather than making the entire application look like an ML laboratory.
 
 ---
 
-# 🏠 Dashboard
+# 🏠 Dashboard Concept
 
-The dashboard should prioritize actionable information.
-
-Example:
+The dashboard brings together:
 
 ```text
-┌──────────────────────────────────────────────────────────────┐
-│ FinSight                                   October 2026      │
-│ Good evening                                                 │
-├────────────┬────────────┬────────────┬──────────────────────┤
-│ Balance    │ Income     │ Expenses   │ Savings              │
-│ ₹84,500    │ ₹75,000    │ ₹48,200    │ ₹26,800              │
-├────────────┴────────────┴────────────┴──────────────────────┤
-│                                                              │
-│ October Spending                                             │
-│                                                              │
-│ Budget: ₹45,000     Actual: ₹48,200                         │
-│ ████████████████████████████████████                         │
-│                                                              │
-│ ⚠ ₹3,200 over budget                                        │
-│                                                              │
-├───────────────────────────────────┬──────────────────────────┤
-│ Expense Forecast                 │ Financial Health         │
-│                                  │                          │
-│ ₹51,240                          │       82 / 100           │
-│ ↑ 6.3%                           │         GOOD             │
-│                                  │                          │
-├───────────────────────────────────┴──────────────────────────┤
-│                                                              │
-│ Spending by Category                                         │
-│                                                              │
-│ Food           ███████████████ ₹9,400                       │
-│ Shopping       ██████████      ₹6,200                       │
-│ Transport      ███████         ₹4,800                       │
-│ Utilities      █████           ₹4,100                       │
-│                                                              │
-├──────────────────────────────────────────────────────────────┤
-│ Insights                                                     │
-│                                                              │
-│ • Food spending increased 18%                                │
-│ • Weekend spending is higher than weekday spending          │
-│ • Forecast may exceed your budget next month                 │
-│                                                              │
-├──────────────────────────────────────────────────────────────┤
-│ Recent Transactions                                          │
-│                                                              │
-│ Swiggy          Food             -₹650                       │
-│ Uber            Transport        -₹320                       │
-│ Amazon          Shopping         -₹2,450                     │
-└──────────────────────────────────────────────────────────────┘
+Balance
+Income
+Expenses
+Savings
+Budget
+Recent Transactions
+Forecast
+Financial Insights
 ```
+
+The purpose is to make the ML output actionable rather than presenting it as an isolated prediction.
 
 ---
 
-# 💳 Transactions Page
+# 💳 Transactions
 
-The transaction page provides a complete financial history.
+The transaction interface is intended to support:
 
-Features:
-
+* Transaction history
 * Search
-* Category filter
-* Income/expense filter
-* Date filter
+* Category filtering
+* Income/expense filtering
+* Date filtering
 * Transaction details
-* Category editing
+* Category correction
 * Anomaly indicators
 
-Example:
-
-```text
-05 Oct   Swiggy        Food          -₹650
-04 Oct   Uber          Transport     -₹320
-03 Oct   Amazon        Shopping      -₹2,450
-01 Oct   Salary        Income        +₹75,000
-```
+The current banking data is mock/demo data.
 
 ---
 
-# 💰 Budget Page
+# 💰 Budgeting
 
-The budget page contains:
+The product concept includes monthly budget tracking.
+
+A budget can contain:
 
 ```text
-Monthly Income
 Monthly Budget
 Savings Target
-Category Budgets
-Budget Utilization
-Budget Variance
+Food Budget
+Transport Budget
+Shopping Budget
+Entertainment Budget
+Utilities Budget
 ```
 
-Example:
+Budget information can then be compared against:
 
 ```text
-Food
-₹6,820 / ₹8,000
-85%
-
-Transport
-₹3,200 / ₹5,000
-64%
-
-Shopping
-₹6,200 / ₹6,000
-103%
-🔴 Over Budget
+Actual Spending
 ```
+
+and the ML forecast can be used to identify potential future budget pressure.
 
 ---
 
-# 📊 Analytics Page
+# 🧠 Financial Insights
 
-The analytics page combines:
+The application can present model- and rule-based insights such as:
 
-* Historical financial trends
-* Category analysis
-* Savings analysis
-* Spending behavior
-* Monthly comparisons
-* Recurring expenses
+```text
+Expenses are increasing compared with the previous month.
+
+Forecasted expenses may exceed the current budget.
+
+An unusual financial behavior pattern was detected.
+
+A spending category has increased significantly.
+```
+
+These insights are analytical outputs and not professional financial advice.
+
+---
+
+# 📊 Analytics
+
+The analytics layer is intended to provide:
+
+* Monthly expense trends
+* Income versus expense
+* Category spending
+* Savings trends
 * Spending volatility
+* Monthly comparisons
+* Historical financial behavior
 
 ---
 
-# 🧠 My Habits Page
+# 🏦 Account Connection UX
 
-This page focuses specifically on behavioral patterns.
-
-Possible sections:
+The onboarding prototype demonstrates:
 
 ```text
-Spending Frequency
-Top Categories
-Weekend vs Weekday
-End-of-Month Spending
-Recurring Payments
-Spending Growth
-Savings Behavior
+Connect Account
+      ↓
+Mobile Number
+      ↓
+Mock Accounts
+      ↓
+Account Selection
+      ↓
+Consent
+      ↓
+Mock Authentication
+      ↓
+Mock Synchronization
+      ↓
+Dashboard
 ```
 
-Example:
+All authentication and consent states are simulated.
 
-> Your weekend spending is 41% higher than your weekday spending.
-
----
-
-# 🔮 Forecast Page
-
-The forecast page contains:
+They should therefore be presented as:
 
 ```text
-Next Month Forecast
-
-₹51,240
-
-Prediction Range
-
-₹47,800 — ₹55,100
-
-Expected Change
-
-+6.3%
+Mock Authentication
+Mock Consent
+Mock Data Synchronization
 ```
 
-It should also display:
-
-* Prediction explanation
-* Important features
-* Historical trend
-* Forecast confidence/range
-* Budget comparison
-
----
-
-# 🎛️ What-If Simulator
-
-The user can adjust financial variables.
-
-Example:
-
-```text
-Income
-₹75,000
-
-Food
-₹8,000 → ₹6,000
-
-Shopping
-₹6,000 → ₹4,500
-
-Transport
-₹5,000 → ₹4,000
-```
-
-The backend generates a new prediction.
-
-```text
-Current Forecast:
-₹51,240
-
-Scenario Forecast:
-₹47,900
-
-Estimated Difference:
-₹3,340
-```
-
----
-
-# 🚨 Alerts Page
-
-Centralized alerts:
-
-```text
-⚠ Food budget 85% used
-
-🚨 Unusual transaction detected
-
-⚠ Forecast exceeds planned budget
-
-📈 Shopping expenses increased 18%
-
-✓ Savings target currently on track
-```
-
----
-
-# 🏦 Accounts Page
-
-Shows:
-
-* Connected banks
-* Account type
-* Masked account number
-* Current balance
-* Connection status
-* Consent status
-* Last data refresh
-* Disconnect option
-
-Example:
-
-```text
-HDFC Bank
-Savings Account
-XXXX 4821
-
-Connected
-Last synced:
-05 Oct 2026
-```
-
----
-
-# ⚙️ Settings
-
-Potential settings:
-
-```text
-Profile
-Currency
-Budget Preferences
-Categories
-Connected Accounts
-Consent Management
-Notifications
-Security
-Data Management
-```
+rather than real banking authentication.
 
 ---
 
@@ -1734,8 +1087,6 @@ HTML
 CSS
 ```
 
-The frontend provides the modern SaaS interface.
-
 ---
 
 ## Backend
@@ -1746,14 +1097,6 @@ FastAPI
 Pydantic
 Uvicorn
 ```
-
-FastAPI exposes REST endpoints for:
-
-* Financial data
-* Forecasting
-* Anomaly detection
-* Budget calculations
-* Financial insights
 
 ---
 
@@ -1766,11 +1109,11 @@ NumPy
 
 Used for:
 
-* Data cleaning
+* Cleaning
 * Aggregation
 * Transformation
 * Feature engineering
-* Statistical calculations
+* Financial calculations
 
 ---
 
@@ -1787,18 +1130,17 @@ Used for:
 * Gradient Boosting
 * Isolation Forest
 * TimeSeriesSplit
-* Metrics
-* Preprocessing
+* Evaluation metrics
 
 ---
 
-## Explainable AI
+## Explainability
 
 ```text
 SHAP
 ```
 
-Used where compatible with the selected final forecasting model.
+Used for interpreting the selected tree-based forecasting model.
 
 ---
 
@@ -1808,21 +1150,11 @@ Used where compatible with the selected final forecasting model.
 Joblib
 ```
 
-Used to save:
-
-```text
-Forecast model
-Preprocessing pipeline
-Model metadata
-```
+Used for storing trained model artifacts.
 
 ---
 
-## Visualization
-
-Frontend visualizations can use a React-compatible charting library.
-
-ML notebooks may use:
+## Academic Visualization
 
 ```text
 Matplotlib
@@ -1832,9 +1164,9 @@ Plotly
 
 ---
 
-# 📁 Proposed Project Structure
+# 📁 Current Project Structure
 
-The project is now organized around the full-stack architecture.
+The important current components are organized approximately as follows:
 
 ```text
 finsight-personal-finance-forecasting/
@@ -1842,881 +1174,94 @@ finsight-personal-finance-forecasting/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
-├── .env.example
 │
 ├── backend/
-│   ├── main.py
-│   │
-│   ├── routes/
-│   │   ├── auth.py
-│   │   ├── accounts.py
-│   │   ├── transactions.py
-│   │   ├── budget.py
-│   │   ├── forecast.py
-│   │   ├── analytics.py
-│   │   └── insights.py
-│   │
-│   ├── services/
-│   │   ├── mock_bank.py
-│   │   ├── consent.py
-│   │   ├── transaction_service.py
-│   │   ├── budget_service.py
-│   │   ├── forecast_service.py
-│   │   ├── anomaly_service.py
-│   │   └── insight_service.py
-│   │
-│   └── models/
-│       ├── user.py
-│       ├── account.py
-│       ├── transaction.py
-│       └── budget.py
+│   └── main.py
 │
 ├── frontend/
 │   ├── package.json
-│   ├── next.config.js
-│   │
 │   ├── app/
-│   │   ├── page.jsx
+│   │   ├── page.js
 │   │   ├── login/
 │   │   ├── onboarding/
 │   │   ├── dashboard/
-│   │   ├── transactions/
-│   │   ├── analytics/
-│   │   ├── budget/
 │   │   ├── forecast/
-│   │   ├── habits/
-│   │   ├── alerts/
-│   │   ├── accounts/
-│   │   └── settings/
+│   │   └── ...
 │   │
 │   ├── components/
-│   │   ├── dashboard/
-│   │   ├── transactions/
-│   │   ├── budget/
-│   │   ├── forecast/
-│   │   ├── charts/
-│   │   └── ui/
-│   │
 │   └── lib/
-│       └── api.js
 │
-├── src/
-│   ├── preprocessing.py
-│   ├── train_model.py
+├── model/
+│   ├── data/
+│   │   ├── Personal_Finance_Dataset.csv
+│   │   └── monthly_features.csv
 │   │
-│   ├── features/
-│   │   ├── lag_features.py
-│   │   ├── rolling_features.py
-│   │   └── financial_features.py
-│   │
-│   ├── forecasting/
-│   │   └── predictor.py
-│   │
-│   ├── anomaly/
-│   │   └── detector.py
-│   │
-│   ├── explainability/
-│   │   └── explainer.py
-│   │
-│   └── insights/
-│       └── generator.py
-│
-├── data/
-│   ├── raw/
-│   │   └── financial_data.csv
-│   │
-│   ├── processed/
-│   │   └── monthly_financial_data.csv
-│   │
-│   └── mock/
-│       ├── mock_accounts.json
-│       └── mock_transactions.json
-│
-├── models/
-│   ├── forecast_model.pkl
-│   ├── anomaly_model.pkl
-│   ├── preprocessing.pkl
-│   └── metadata.json
+│   ├── models/
+│   └── src/
+│       ├── preprocessing.py
+│       └── train_model.py
 │
 ├── notebooks/
-│   ├── 01_dataset_exploration.ipynb
-│   ├── 02_data_cleaning.ipynb
-│   ├── 03_eda.ipynb
-│   ├── 04_feature_engineering.ipynb
-│   ├── 05_model_training.ipynb
-│   ├── 06_model_comparison.ipynb
-│   └── 07_error_analysis.ipynb
+│   └── 01_eda.ipynb
+│
+├── streamlit_app/
+│   ├── app.py
+│   └── requirements.txt
 │
 ├── tests/
-│   ├── test_data.py
-│   ├── test_features.py
+│   ├── test_preprocessing.py
 │   ├── test_model.py
-│   ├── test_api.py
-│   └── test_prediction.py
-│
-├── assets/
-│   ├── screenshots/
-│   └── diagrams/
+│   └── test_api.py
 │
 └── docs/
-    ├── architecture.md
-    ├── methodology.md
     ├── experiments.md
-    ├── banking-prototype.md
-    └── limitations.md
+    ├── deployment.md
+    └── ...
 ```
+
+The exact repository structure may evolve as the project is developed further.
 
 ---
 
-# 🔄 Complete System Workflow
+# 🧪 Testing
 
-```text
-                         USER
-                           │
-                           ▼
-                     LOGIN / SIGNUP
-                           │
-                           ▼
-                  CONNECT BANK ACCOUNT
-                           │
-                           ▼
-                  ENTER MOBILE NUMBER
-                           │
-                           ▼
-                   MOCK ACCOUNT DISCOVERY
-                           │
-                           ▼
-                    SELECT ACCOUNT
-                           │
-                           ▼
-                    CONSENT SCREEN
-                           │
-                           ▼
-                  MOCK BANK AUTHENTICATION
-                           │
-                           ▼
-                    DATA APPROVAL
-                           │
-                           ▼
-               FETCH PREVIOUS 3 MONTHS
-                           │
-                           ▼
-                  TRANSACTION PROCESSING
-                           │
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-        Categorization  Recurring    Validation
-                         Detection
-              │            │            │
-              └────────────┼────────────┘
-                           ▼
-                    FINANCIAL PROFILE
-                           │
-                           ▼
-                     SET MONTHLY BUDGET
-                           │
-                           ▼
-                      DASHBOARD
-                           │
-           ┌───────────────┼────────────────┐
-           ▼               ▼                ▼
-       Analytics        Budget           Transactions
-           │               │                │
-           └───────────────┼────────────────┘
-                           ▼
-                    HABIT ANALYSIS
-                           │
-                           ▼
-                  ML FORECASTING ENGINE
-                           │
-          ┌────────────────┼────────────────┐
-          ▼                ▼                ▼
-      Forecast         Anomaly         Explainability
-          │             Detection            │
-          └────────────────┼────────────────┘
-                           ▼
-                     WHAT-IF ENGINE
-                           │
-                           ▼
-                    FINANCIAL INSIGHTS
-                           │
-                           ▼
-                       ALERTS
-```
+The project includes tests covering the main ML and API components.
 
----
+## Preprocessing Tests
 
-# 🧪 Academic Development Pipeline
+Examples include:
 
-The research/ML side follows:
+* Target shifting
+* Previous expense feature
+* Savings calculation
 
-```text
-Raw Dataset
-    ↓
-Data Understanding
-    ↓
-Data Cleaning
-    ↓
-EDA
-    ↓
-Feature Engineering
-    ↓
-Baseline
-    ↓
-Model Training
-    ↓
-Time-Aware Validation
-    ↓
-Model Comparison
-    ↓
-Final Model
-    ↓
-Explainability
-    ↓
-Anomaly Detection
-    ↓
-Uncertainty
-    ↓
-Deployment
-```
+## Model Tests
 
----
+Examples include:
 
-# 🛠️ Development Phases
-
-## PHASE 0 — Project Architecture
-
-### Goal
-
-Finalize the product and technical architecture.
-
-### Tasks
-
-* Finalize FinSight branding
-* Define system modules
-* Define frontend/backend architecture
-* Define mock banking flow
-* Define ML target
-* Define API structure
-* Create GitHub repository
-
-### Deliverables
-
-```text
-Architecture
-README
-Repository
-Initial frontend
-Initial backend
-```
-
----
-
-# PHASE 1 — Dataset & Mock Financial Data
-
-### Goal
-
-Establish the financial data source.
-
-### Tasks
-
-* Select public dataset
-* Document dataset
-* Validate columns
-* Create mock bank accounts
-* Create mock transaction data
-* Define transaction schema
-
-### Deliverables
-
-```text
-Raw dataset
-Mock accounts
-Mock transactions
-Dataset documentation
-```
-
----
-
-# PHASE 2 — Data Processing
-
-### Goal
-
-Build the data pipeline.
-
-### Tasks
-
-* Missing-value handling
-* Duplicate detection
-* Date processing
-* Transaction validation
-* Category normalization
-* Monthly aggregation
-
----
-
-# PHASE 3 — EDA
-
-### Goal
-
-Understand financial behavior.
-
-### Tasks
-
-* Monthly expense analysis
-* Income analysis
-* Savings analysis
-* Category analysis
-* Correlation analysis
-* Spending volatility
-* Seasonal analysis
-
----
-
-# PHASE 4 — Feature Engineering
-
-Create:
-
-```text
-Lag features
-Rolling averages
-Growth rates
-Financial ratios
-Recurring expense features
-Time features
-Seasonal features
-```
-
----
-
-# PHASE 5 — Baseline Model
-
-Implement:
-
-```text
-Previous Month Expense
-```
-
-The baseline establishes the minimum forecasting performance that a complex ML model must beat.
-
----
-
-# PHASE 6 — ML Model Development
-
-Train:
-
-```text
-Linear Regression
-Random Forest
-Gradient Boosting
-```
-
-Optional:
-
-```text
-XGBoost
-ARIMA
-SARIMA
-```
-
----
-
-# PHASE 7 — Model Evaluation
-
-Evaluate using:
-
-```text
-MAE
-RMSE
-R²
-```
-
-Use:
-
-```text
-TimeSeriesSplit
-```
-
-where appropriate.
-
----
-
-# PHASE 8 — Forecast API
-
-Connect the trained model to FastAPI.
-
-Example conceptual endpoint:
-
-```text
-POST /api/forecast
-```
-
-Input:
-
-```json
-{
-  "income": 75000,
-  "food_expense": 8000,
-  "transport_expense": 5000,
-  "shopping_expense": 6000
-}
-```
-
-Output:
-
-```json
-{
-  "forecast": 51240,
-  "lower_bound": 47800,
-  "upper_bound": 55100
-}
-```
-
----
-
-# PHASE 9 — Anomaly API
-
-Example:
-
-```text
-POST /api/anomaly
-```
-
-The backend returns:
-
-```json
-{
-  "is_anomaly": true,
-  "severity": "high",
-  "score": 0.91
-}
-```
-
----
-
-# PHASE 10 — Explainability
-
-Implement:
-
-```text
-SHAP
-Feature Importance
-Permutation Importance
-```
-
-Expose the result through the forecast UI.
-
----
-
-# PHASE 11 — Budget System
-
-Implement:
-
-* Monthly budget
-* Category budgets
-* Budget tracking
-* Budget variance
-* Budget alerts
-* Savings target
-
----
-
-# PHASE 12 — Habit Intelligence
-
-Implement:
-
-* Spending trends
-* Category behavior
-* Weekend/weekday behavior
-* End-of-month behavior
-* Recurring payments
-* Spending growth
-
----
-
-# PHASE 13 — What-If Simulator
-
-Implement:
-
-```text
-Baseline
-    ↓
-Modify financial inputs
-    ↓
-Call forecast API
-    ↓
-Compare results
-```
-
----
-
-# PHASE 14 — Frontend Integration
-
-Build:
-
-```text
-Login
-Onboarding
-Bank Connection
-Consent
-Dashboard
-Transactions
-Budget
-Analytics
-Habits
-Forecast
-What-If
-Alerts
-Accounts
-Settings
-```
-
----
-
-# PHASE 15 — Testing
-
-## Data Tests
-
-* Missing values
-* Duplicate records
-* Invalid dates
-* Invalid amounts
-* Category validation
-
-## ML Tests
-
-* Feature consistency
-* Prediction shape
-* No future leakage
-* Model loading
-* Forecast stability
+* Random Forest training
+* Prediction generation
+* TimeSeriesSplit evaluation
+* Metric generation
 
 ## API Tests
 
-* Valid requests
-* Invalid requests
-* Missing parameters
-* Authentication
-* Error handling
-
-## Frontend Tests
-
-* Login flow
-* Bank connection flow
-* Dashboard rendering
-* Transaction filtering
-* Budget calculations
-* Forecast display
-* What-if simulation
-
----
-
-# PHASE 16 — Final Integration
-
-Connect:
-
-```text
-Frontend
-   ↓
-FastAPI
-   ↓
-Financial Services
-   ↓
-ML Services
-   ↓
-Models
-   ↓
-Financial Data
-```
-
----
-
-# PHASE 17 — Documentation & Report
-
-Prepare:
-
-```text
-README
-Architecture Documentation
-Dataset Documentation
-Methodology
-Experiments
-Model Evaluation
-Application Documentation
-Limitations
-Future Work
-```
-
----
-
-# 🧪 Testing Strategy
-
-The system should test both product and ML functionality.
-
-## Data Layer
-
-```text
-✓ Valid transactions
-✓ Duplicate transactions
-✓ Missing values
-✓ Invalid dates
-✓ Invalid amounts
-```
-
-## ML Layer
-
-```text
-✓ Features generated correctly
-✓ No future leakage
-✓ Model loads correctly
-✓ Prediction returns numerical result
-✓ Prediction range is valid
-```
-
-## Backend
-
-```text
-✓ API starts
-✓ Endpoints respond
-✓ Invalid input handled
-✓ Model errors handled
-✓ Authentication enforced where applicable
-```
-
-## Frontend
-
-```text
-✓ Login works
-✓ Onboarding works
-✓ Mock bank flow works
-✓ Transactions load
-✓ Budget updates
-✓ Forecast loads
-✓ What-if scenario works
-```
-
----
-
-# 🔒 Security & Privacy
-
-Because FinSight deals with financial information, security is a major design principle.
-
-The prototype must:
-
-* Never request real banking passwords
-* Never request UPI PINs
-* Never request real OTPs
-* Never store card credentials
-* Never expose sensitive financial information
-* Never commit secrets to GitHub
-* Use masked account numbers
-* Use synthetic/mock financial accounts
-* Use anonymized user identifiers
-
-Real banking integration is a future production feature and is outside the scope of the academic prototype.
-
----
-
-# ⚠️ Important Prototype Limitation
-
-The bank connection is **simulated**.
-
-The prototype does not actually retrieve transactions from:
-
-* HDFC
-* ICICI
-* SBI
-* Axis
-* Other real banks
-
-Instead, the system simulates:
-
-```text
-Account Discovery
-→ Account Selection
-→ Consent
-→ Authentication
-→ Data Sharing
-→ Transaction Retrieval
-```
-
-This allows the project to demonstrate the complete user experience without handling real banking credentials or financial accounts.
-
----
-
-# 🧑‍💻 Current Implementation
-
-The current system has four major technical layers.
-
-## 1. Data Pipeline
-
-```text
-src/preprocessing.py
-```
-
-Responsible for:
-
-* Loading raw financial data
-* Cleaning
-* Feature engineering
-* Rolling features
-* Growth rates
-* Time-series preparation
-* Preventing future-data leakage
-
----
-
-## 2. ML Engine
-
-```text
-src/train_model.py
-```
-
-Responsible for:
-
-* Training forecasting models
-* Evaluating models
-* Random Forest expense forecasting
-* Isolation Forest anomaly detection
-* Saving trained models
-
----
-
-## 3. Backend API
-
-```text
-backend/main.py
-```
-
-Built with:
-
-```text
-FastAPI
-```
-
-Responsible for:
-
-* Loading trained models
-* Forecast API
-* Anomaly API
-* Financial services
-* Backend/frontend communication
-
----
-
-## 4. Frontend
-
-```text
-frontend/
-```
-
-Built with:
-
-```text
-Next.js
-React
-JavaScript
-```
-
-Responsible for:
-
-* SaaS dashboard
-* Financial overview
-* Transactions
-* Forecasting interface
-* What-if simulator
-* Budget interface
-* Account connection UX
-* Financial insights
-
----
-
-# 🆚 Evolution of the Prototype
-
-The project originally started as a basic Streamlit application.
-
-### Original Architecture
-
-```text
-Python
-   ↓
-Streamlit
-   ↓
-ML Model
-   ↓
-Prediction
-```
-
-This was useful for validating the ML concept.
-
-However, it was replaced with a more professional full-stack architecture.
-
-### Current Architecture
-
-```text
-Next.js / React
-       ↓
-    FastAPI
-       ↓
-Financial Services
-       ↓
-ML Engine
-       ↓
-Forecast / Anomaly / Explainability
-```
-
-This allows FinSight to behave more like a real SaaS product.
-
----
-
-# 📦 Requirements
-
-## Python
-
-```text
-Python 3.11+
-```
-
-Expected Python dependencies include:
-
-```text
-pandas
-numpy
-scikit-learn
-fastapi
-uvicorn
-joblib
-shap
-```
-
-Optional:
-
-```text
-statsmodels
-xgboost
-```
-
----
-
-## Frontend
-
-The frontend uses:
-
-```text
-Node.js
-Next.js
-React
-npm
-```
+Examples include:
+
+* API health endpoint
+* Prediction validation
+* Historical endpoint
+* Invalid request handling
 
 ---
 
 # ▶️ Running the Project
 
-## 1. Clone the Repository
+## 1. Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/finsight-personal-finance-forecasting.git
+git clone https://github.com/vijayKota2776/finsight-personal-finance-forecasting.git
+
 cd finsight-personal-finance-forecasting
 ```
 
@@ -2724,17 +1269,11 @@ cd finsight-personal-finance-forecasting
 
 # 2. Backend Setup
 
-```bash
-cd backend
-```
-
 Create a Python environment:
 
 ```bash
 python -m venv venv
 ```
-
-Activate it.
 
 ### macOS/Linux
 
@@ -2751,13 +1290,13 @@ venv\Scripts\activate
 Install dependencies:
 
 ```bash
-pip install -r ../requirements.txt
+pip install -r requirements.txt
 ```
 
 Run FastAPI:
 
 ```bash
-uvicorn main:app --reload
+uvicorn backend.main:app --reload
 ```
 
 Backend:
@@ -2772,6 +1311,8 @@ API documentation:
 http://localhost:8000/docs
 ```
 
+> If running from inside the `backend/` directory, use the corresponding local module command configured for the repository.
+
 ---
 
 # 3. Frontend Setup
@@ -2780,7 +1321,7 @@ http://localhost:8000/docs
 cd frontend
 ```
 
-Install packages:
+Install dependencies:
 
 ```bash
 npm install
@@ -2800,99 +1341,484 @@ http://localhost:3000
 
 ---
 
-# 🧠 ML Model Training
+# 4. Train the ML Model
 
-The training pipeline can be executed using:
+The training pipeline is located at:
+
+```text
+model/src/train_model.py
+```
+
+Run:
 
 ```bash
-python src/train_model.py
+python model/src/train_model.py
 ```
 
-The resulting models are stored under:
+The training process:
 
 ```text
-models/
-```
-
-Example:
-
-```text
-models/
-├── forecast_model.pkl
-├── anomaly_model.pkl
-├── preprocessing.pkl
-└── metadata.json
+Raw Financial Dataset
+        ↓
+Preprocessing
+        ↓
+Feature Engineering
+        ↓
+Time-Aware Validation
+        ↓
+Model Training
+        ↓
+Model Comparison
+        ↓
+Final Random Forest
+        ↓
+Model Persistence
 ```
 
 ---
 
-# 📊 Expected Model Output
+# 5. Run Streamlit Academic Application
 
-Example:
+The Streamlit layer provides an academic interface for demonstrating the ML workflow.
+
+From the project root:
+
+```bash
+streamlit run streamlit_app/app.py
+```
+
+The Streamlit application can be used to demonstrate areas such as:
+
+```text
+Dataset
+EDA
+Model Comparison
+Forecast
+Explainability
+What-If
+```
+
+---
+
+# 📊 Example Prediction Response
+
+The backend may return a structure similar to:
 
 ```json
 {
   "forecast": 51240,
   "lower_bound": 47800,
-  "upper_bound": 55100,
-  "change_percentage": 6.3
+  "upper_bound": 55100
 }
 ```
 
+The lower and upper values represent an **estimated uncertainty range**, not a validated statistical confidence interval.
+
 ---
 
-# 📈 Example Financial Insight
+# 🔄 End-to-End ML Workflow
 
 ```text
-Your predicted expenses for next month are
-₹51,240.
-
-This is approximately 6.3% higher than your
-current monthly expenses.
-
-The major contributors are:
-
-• Previous spending trend
-• Food expenses
-• Recurring expenses
-• Transportation growth
-
-Your current monthly budget of ₹45,000 may be
-approximately ₹6,240 below the predicted expense.
+Raw Financial Transactions
+          ↓
+Data Cleaning
+          ↓
+Monthly Aggregation
+          ↓
+Feature Engineering
+          ↓
+Lag Features
+          ↓
+Rolling Features
+          ↓
+Growth Features
+          ↓
+Target Creation
+          ↓
+Leakage Prevention
+          ↓
+TimeSeriesSplit
+          ↓
+Model Comparison
+          ↓
+Random Forest Selection
+          ↓
+SHAP Explainability
+          ↓
+Model Persistence
+          ↓
+FastAPI
+          ↓
+Next.js Forecast UI
+          ↓
+What-If Simulation
 ```
 
 ---
 
-# 🌳 Git/GitHub Strategy
+# 🔬 Academic Development Workflow
 
-Recommended repository:
+```text
+Problem Definition
+        ↓
+Dataset Understanding
+        ↓
+Data Cleaning
+        ↓
+EDA
+        ↓
+Feature Engineering
+        ↓
+Baseline
+        ↓
+Model Training
+        ↓
+Time-Aware Validation
+        ↓
+Model Comparison
+        ↓
+Error Analysis
+        ↓
+Final Model
+        ↓
+Explainability
+        ↓
+Anomaly Detection
+        ↓
+Uncertainty Estimation
+        ↓
+Application Integration
+        ↓
+Evaluation
+```
+
+---
+
+# 📋 Academic Deliverables
+
+The project addresses the major coursework requirements.
+
+## 1. Problem Definition
+
+Formal definition of next-month expense forecasting.
+
+## 2. Dataset
+
+Dataset structure, financial variables, preprocessing requirements, and limitations.
+
+## 3. EDA
+
+Analysis of:
+
+* Expense trends
+* Category distribution
+* Correlations
+* Financial behavior
+
+## 4. Data Preprocessing
+
+Cleaning, aggregation, feature engineering, and leakage prevention.
+
+## 5. Model Development
+
+Comparison of:
+
+* Naive baseline
+* Linear Regression
+* Random Forest
+* Gradient Boosting
+
+## 6. Evaluation
+
+Evaluation using:
+
+```text
+MAE
+RMSE
+R²
+TimeSeriesSplit
+```
+
+## 7. Explainability
+
+SHAP-based model interpretation.
+
+## 8. Anomaly Detection
+
+Isolation Forest-based financial behavior anomaly detection.
+
+## 9. Application
+
+Functional Streamlit academic application and full-stack Next.js/FastAPI prototype.
+
+## 10. Documentation
+
+Technical documentation, experiments, limitations, and deployment documentation.
+
+---
+
+# 📈 Current Academic Result
+
+The most important experimental result is:
+
+```text
+Random Forest
+     ↓
+Best MAE
+     ↓
+Best RMSE
+     ↓
+Selected Final Model
+```
+
+However:
+
+```text
+All tested R² values < 0
+```
+
+Therefore, the result should be interpreted honestly.
+
+### Academic conclusion
+
+> The Random Forest model provided the best performance among the evaluated models and improved the naive baseline in MAE and RMSE. Nevertheless, negative R² values across all models indicate that the available dataset contains limited predictive signal for this forecasting task. The final model is therefore suitable as a prototype demonstration rather than a production-grade financial forecasting system.
+
+This limitation is an important part of the academic analysis rather than something to hide.
+
+---
+
+# ⚠️ Current Limitations
+
+## 1. Small Monthly Dataset
+
+The processed dataset contains approximately 58 usable monthly observations.
+
+This limits:
+
+* statistical confidence,
+* generalization,
+* seasonal analysis,
+* model complexity.
+
+---
+
+## 2. Limited Predictive Signal
+
+The negative R² values indicate that the current feature set and dataset do not provide strong predictive performance.
+
+---
+
+## 3. Mock Banking
+
+The banking integration is simulated.
+
+FinSight does not retrieve real bank data.
+
+---
+
+## 4. ML and Mock Bank Are Partially Separate
+
+The current mock transaction synchronization does not dynamically retrain or personalize the academic forecasting model.
+
+---
+
+## 5. Uncertainty Is an Estimate
+
+The current uncertainty range is derived from ensemble prediction dispersion.
+
+It is not a statistically validated prediction interval.
+
+---
+
+## 6. Anomaly Detection Scope
+
+The current Isolation Forest implementation represents financial behavior anomaly detection rather than a complete transaction fraud-detection system.
+
+---
+
+## 7. Explainability Scope
+
+Current SHAP analysis primarily provides global feature importance.
+
+Individual prediction explanations can be improved in future work.
+
+---
+
+## 8. Historical Data Limitation
+
+Historical financial behavior cannot account for all future events.
+
+Examples include:
+
+* Emergency expenses
+* Major purchases
+* Salary changes
+* Unexpected bills
+* Lifestyle changes
+
+---
+
+## 9. Financial Advice Disclaimer
+
+FinSight is an academic/software prototype.
+
+It does not provide regulated financial advice.
+
+---
+
+# 🚀 Future Improvements
+
+Future versions could improve the system through:
+
+## Real Financial Data Integration
+
+Replace the mock banking flow with an appropriate regulated financial-data integration.
+
+---
+
+## Personalized Models
+
+Train or adapt forecasting models for individual users once sufficient personal history is available.
+
+---
+
+## Better Uncertainty Estimation
+
+Evaluate:
+
+```text
+Conformal Prediction
+Quantile Regression
+Bootstrap Intervals
+Probabilistic Forecasting
+```
+
+---
+
+## Better Transaction-Level Anomaly Detection
+
+Build a dedicated transaction anomaly model using:
+
+```text
+Amount
+Merchant
+Category
+Time
+Frequency
+User History
+```
+
+---
+
+## Improved Explainability
+
+Provide local prediction explanations:
+
+```text
+Why did the forecast increase?
+
+Previous expense trend
+Food spending
+Recurring expenses
+Shopping behavior
+Income change
+```
+
+---
+
+## More Forecast Targets
+
+Potential future targets include:
+
+```text
+Next Month Expenses
+Savings
+Cash Flow
+Budget Risk
+Savings Goal Completion
+```
+
+---
+
+## Goal-Based Financial Planning
+
+Users could define:
+
+```text
+Emergency Fund
+Laptop
+Vacation
+Education
+Vehicle
+Home
+```
+
+and estimate whether they are on track.
+
+---
+
+## More Historical Data
+
+A larger dataset would enable more reliable:
+
+* seasonal modeling,
+* personalized forecasting,
+* validation,
+* model comparison.
+
+---
+
+## Advanced Time-Series Models
+
+If sufficient data becomes available:
+
+```text
+ARIMA
+SARIMA
+XGBoost
+LSTM
+GRU
+Temporal Fusion Transformer
+```
+
+could be investigated.
+
+---
+
+# 🔐 Security & Privacy Principles
+
+Even though the banking layer is simulated, the project follows privacy-oriented design principles.
+
+FinSight should:
+
+* Never request real banking passwords
+* Never request UPI PINs
+* Never request real OTPs
+* Never store card credentials
+* Never commit secrets to GitHub
+* Use masked account numbers
+* Use synthetic/mock financial accounts
+* Avoid exposing unnecessary financial information
+
+---
+
+# 🌳 Repository
+
+GitHub:
+
+```text
+https://github.com/vijayKota2776/finsight-personal-finance-forecasting
+```
+
+Repository name:
 
 ```text
 finsight-personal-finance-forecasting
 ```
 
-Recommended branches:
-
-```text
-main
-
-feature/auth
-feature/mock-bank
-feature/transactions
-feature/budget
-feature/preprocessing
-feature/model-training
-feature/forecast-api
-feature/anomaly-detection
-feature/explainability
-feature/frontend
-feature/what-if
-feature/testing
-```
-
 ---
 
-# 📝 Commit Examples
+# 📝 Development Commit Examples
 
 ```text
 feat: add mock bank account discovery
@@ -2900,70 +1826,94 @@ feat: implement consent flow
 feat: add transaction ingestion
 feat: add transaction categorization
 feat: implement monthly budget
-feat: add recurring expense detection
-feat: implement financial habit analysis
+feat: add financial habit analysis
 feat: add random forest forecasting
 feat: add isolation forest anomaly detection
+feat: add SHAP explainability
 feat: expose forecast API
 feat: integrate forecast dashboard
 feat: add what-if simulator
-feat: add financial insights
-fix: handle invalid transaction data
+
 fix: prevent future data leakage
-docs: update architecture documentation
+fix: correct preprocessing validation
+fix: handle invalid prediction input
+
+test: add preprocessing tests
+test: add model evaluation tests
+test: add API validation tests
+
+docs: update experiment results
+docs: update architecture
+docs: document limitations
 ```
 
 ---
 
-# 📋 Academic Deliverables
+# 🧭 Current Implementation Status
 
-The project will provide evidence for:
+## Product Layer
 
-## Problem Definition
+| Component                        | Status            |
+| -------------------------------- | ----------------- |
+| Next.js frontend                 | ✅ Implemented     |
+| FastAPI backend                  | ✅ Implemented     |
+| Authentication UI                | ✅ Implemented     |
+| Mock bank flow                   | ✅ Implemented     |
+| Mock account discovery           | ✅ Implemented     |
+| Mock consent                     | ✅ Implemented     |
+| Mock transaction synchronization | ✅ Implemented     |
+| Dashboard                        | ✅ Implemented     |
+| Forecast interface               | ✅ Implemented     |
+| What-If simulator                | ✅ Implemented     |
+| Transaction experience           | ✅ Implemented     |
+| Budget intelligence              | ✅ Implemented     |
+| Habit intelligence               | ✅ Implemented     |
 
-Formal definition of the financial forecasting problem.
+---
 
-## Dataset
+## ML Layer
 
-Dataset source, structure, quality, and limitations.
+| Component                      | Status            |
+| ------------------------------ | ----------------- |
+| Dataset                        | ✅ Implemented     |
+| Preprocessing                  | ✅ Implemented     |
+| Feature engineering            | ✅ Implemented     |
+| Leakage prevention             | ✅ Implemented     |
+| Naive baseline                 | ✅ Implemented     |
+| Linear Regression              | ✅ Implemented     |
+| Random Forest                  | ✅ Implemented     |
+| Gradient Boosting              | ✅ Implemented     |
+| TimeSeriesSplit                | ✅ Implemented     |
+| Model comparison               | ✅ Implemented     |
+| SHAP                           | ✅ Implemented     |
+| Isolation Forest               | ✅ Implemented     |
+| Uncertainty estimate           | ✅ Implemented     |
 
-## Data Preprocessing
+---
 
-Cleaning and feature engineering.
+## Academic Layer
 
-## EDA
-
-Financial trends and behavioral analysis.
-
-## Model Development
-
-Multiple ML models and baseline comparison.
-
-## Evaluation
-
-MAE, RMSE, R² and time-aware validation.
-
-## Explainability
-
-Feature importance and prediction explanations.
-
-## Anomaly Detection
-
-Unusual spending identification.
-
-## Application
-
-Functional full-stack FinSight prototype.
-
-## Documentation
-
-Technical and academic documentation.
+| Component                    | Status                    |
+| ---------------------------- | ------------------------- |
+| Problem definition           | ✅                         |
+| Dataset analysis             | ✅                         |
+| EDA                          | ✅                         |
+| Data preprocessing           | ✅                         |
+| Feature engineering          | ✅                         |
+| Model comparison             | ✅                         |
+| Time-aware validation        | ✅                         |
+| Evaluation metrics           | ✅                         |
+| Error analysis               | ✅                         |
+| Explainability               | ✅                         |
+| Anomaly detection            | ✅                         |
+| Streamlit application        | ✅                         |
+| Final academic documentation | ✅                         |
 
 ---
 
 # 🎓 Expected Academic Contribution
 
-The project demonstrates:
+FinSight demonstrates:
 
 ```text
 Supervised Learning
@@ -2972,11 +1922,13 @@ Regression
         +
 Time-Series Forecasting
         +
-Feature Engineering
-        +
 Data Cleaning
         +
+Feature Engineering
+        +
 Exploratory Data Analysis
+        +
+Baseline Comparison
         +
 Model Comparison
         +
@@ -2993,298 +1945,116 @@ REST API Deployment
 Interactive Web Application
 ```
 
-This makes the project significantly stronger than a basic single-model regression assignment.
+The project therefore demonstrates both the **machine-learning methodology** required for the coursework and the **engineering required to turn the model into an application**.
 
 ---
 
-# ⚠️ Limitations
+# 🏁 Final Product Vision
 
-## Historical behavior may change
-
-Past spending does not guarantee future spending.
-
-## Unexpected events
-
-Emergency expenses and major purchases may not be predictable.
-
-## Dataset limitations
-
-Public or synthetic data may not perfectly represent real financial users.
-
-## Limited history
-
-Three months of data is useful for the prototype but insufficient for robust long-term seasonal modeling.
-
-## Mock banking connection
-
-The prototype does not connect to real banks.
-
-## Forecast uncertainty
-
-ML predictions are estimates rather than guaranteed future outcomes.
-
-## Financial advice
-
-FinSight is an academic analytical prototype and is not intended to provide regulated financial advice.
-
----
-
-# 🚀 Future Improvements
-
-Future production versions could include:
-
-## Real Account Aggregator Integration
-
-Replace the mock bank layer with an appropriate regulated financial-data integration.
-
-## Automatic Transaction Categorization
-
-Use NLP/ML to improve merchant and transaction classification.
-
-## Personalized Models
-
-Train models specifically for individual users.
-
-## More Forecast Targets
-
-Predict:
+FinSight is built around:
 
 ```text
-Next Month Expenses
-Savings
-Cash Flow
-Budget Risk
-Goal Completion
-Emergency Fund Growth
+CONNECT
+   ↓
+UNDERSTAND
+   ↓
+ANALYZE
+   ↓
+DETECT
+   ↓
+PREDICT
+   ↓
+PLAN
+   ↓
+IMPROVE
 ```
 
-## Goal-Based Financial Planning
-
-Users could create:
+The long-term product vision is:
 
 ```text
-Emergency Fund
-New Laptop
-Vacation
-Education
-Vehicle
-Home
-```
-
-FinSight could estimate whether the user is on track.
-
-## Deep Learning
-
-Potential future models:
-
-```text
-LSTM
-GRU
-Temporal Fusion Transformer
-```
-
-if sufficient longitudinal data becomes available.
-
-## Mobile Application
-
-Build native Android/iOS applications.
-
-## Production Infrastructure
-
-Potential stack:
-
-```text
-Docker
-Cloud Hosting
-Database
-Authentication
-Monitoring
-CI/CD
-```
-
----
-
-# 🎯 Definition of Done
-
-## Product
-
-* [ ] User registration/login
-* [ ] Mock bank connection
-* [ ] Mock account discovery
-* [ ] Mock consent flow
-* [ ] Mock authentication
-* [ ] Three-month transaction import
-* [ ] Transaction categorization
-* [ ] Transaction page
-* [ ] Dashboard
-* [ ] Monthly budget
-* [ ] Budget tracking
-* [ ] Habit analysis
-* [ ] Recurring expense detection
-* [ ] Financial alerts
-* [ ] Financial health score
-* [ ] Forecast page
-* [ ] What-if simulator
-* [ ] Accounts page
-* [ ] Settings
-
-## Machine Learning
-
-* [ ] Dataset documented
-* [ ] Data cleaning implemented
-* [ ] EDA completed
-* [ ] Feature engineering implemented
-* [ ] Baseline model created
-* [ ] Multiple models trained
-* [ ] Time-aware evaluation performed
-* [ ] MAE calculated
-* [ ] RMSE calculated
-* [ ] R² calculated
-* [ ] Final model selected
-* [ ] Error analysis completed
-* [ ] Explainability implemented
-* [ ] Anomaly detection implemented
-* [ ] Prediction uncertainty implemented
-
-## Engineering
-
-* [ ] FastAPI backend functional
-* [ ] Next.js frontend functional
-* [ ] Frontend/backend integration complete
-* [ ] API validation implemented
-* [ ] Error handling implemented
-* [ ] Tests implemented
-* [ ] Environment variables documented
-* [ ] No secrets committed
-* [ ] README completed
-
-## Academic
-
-* [ ] Problem definition
-* [ ] Dataset documentation
-* [ ] EDA
-* [ ] Methodology
-* [ ] Experiments
-* [ ] Evaluation
-* [ ] Results
-* [ ] Limitations
-* [ ] Future work
-* [ ] Final report
-* [ ] Presentation
-* [ ] Viva preparation
-
----
-
-# 🧭 Final Product Vision
-
-FinSight is built around three major layers.
-
-## Layer 1 — Financial Data
-
-> **Bring financial information together.**
-
-```text
-Bank Accounts
+Financial Data
+      +
 Transactions
-Income
-Expenses
-Recurring Payments
-```
-
----
-
-## Layer 2 — Financial Intelligence
-
-> **Understand what is happening with the user's money.**
-
-```text
+      +
 Budget
+      +
 Analytics
-Habits
-Categories
-Anomalies
-Financial Health
-Insights
-```
-
----
-
-## Layer 3 — Predictive Intelligence
-
-> **Understand what is likely to happen next.**
-
-```text
-Expense Forecast
-Prediction Range
+      +
+Habit Analysis
+      +
+Anomaly Detection
+      +
+Forecasting
+      +
 Explainable AI
-What-If Scenarios
-Budget Risk
-Future Planning
+      +
+What-If Planning
+      ↓
+   FINPILOT
 ```
-
----
-
-# 🔄 The FinSight Intelligence Loop
-
-```text
-                    CONNECT
-                       ↓
-                  UNDERSTAND
-                       ↓
-                    ANALYZE
-                       ↓
-                    DETECT
-                       ↓
-                   PREDICT
-                       ↓
-                    PLAN
-                       ↓
-                   IMPROVE
-                       │
-                       └───────────→ UPDATE DATA
-```
-
----
-
-# 🏁 Final Vision
-
-The final application should not feel like:
-
-> **"A Python script that predicts expenses."**
-
-It should feel like:
-
-> # **"FinSight — a personal financial intelligence platform powered by explainable machine learning."**
 
 The academic requirement remains:
 
 > **Forecast future personal expenses using machine learning.**
 
-But the complete product adds:
+The product vision extends that requirement into:
 
-```text
-             FINANCIAL DATA
-                    +
-              TRANSACTIONS
-                    +
-                 BUDGET
-                    +
-              HABIT ANALYSIS
-                    +
-             ANOMALY DETECTION
-                    +
-                FORECASTING
-                    +
-             EXPLAINABLE AI
-                    +
-             WHAT-IF PLANNING
-                    +
-              FINANCIAL INSIGHTS
-                    ↓
-                 FINSIGHT
-```
+> **A personal financial intelligence platform powered by explainable machine learning.**
 
-**FinSight is therefore both:**
+---
 
-1. **An academically defensible machine-learning project**, and
-2. **A realistic prototype of a personal financial intelligence product.**
+# ⚠️ Final Disclaimer
+
+FinSight is an **academic and software prototype**.
+
+The financial predictions, anomaly scores, scenario outputs, financial-health indicators, and insights are analytical estimates.
+
+They should not be treated as:
+
+* professional financial advice,
+* investment advice,
+* banking advice,
+* credit decisions,
+* fraud determinations,
+* or guaranteed financial outcomes.
+
+The banking connection shown in the application is simulated and does not access real bank accounts.
+
+---
+
+# 👨‍💻 Project
+
+**FinSight — Personal Finance Forecasting & Financial Intelligence Platform**
+
+**Academic Title:**
+*Personal Finance Forecasting Using Explainable Machine Learning*
+
+**Repository:**
+`finsight-personal-finance-forecasting`
+
+**Primary ML Target:**
+`Next Month Total Expense`
+
+**Final Selected Model:**
+`Random Forest Regressor`
+
+**Anomaly Model:**
+`Isolation Forest`
+
+**Explainability:**
+`SHAP`
+
+**Backend:**
+`FastAPI`
+
+**Frontend:**
+`Next.js + React`
+
+**Academic Interface:**
+`Streamlit`
+
+---
+
+# ⭐ FinSight
+
+> **Understand your money. Predict what comes next. Plan with intelligence.**

@@ -8,7 +8,7 @@ def test_health_check():
     """Test that the backend API is up and running."""
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "FinSight ML API is running"}
+    assert response.json() == {"message": "Welcome to the FinSight Machine Learning API!"}
 
 def test_predict_endpoint_validation():
     """Test that the predict endpoint rejects incomplete payloads."""

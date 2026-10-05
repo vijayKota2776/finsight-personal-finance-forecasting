@@ -8,7 +8,7 @@
 
 * **FinSight Frontend (React/Next.js):** [https://finsight-personal-finance-forecasti.vercel.app/](https://finsight-personal-finance-forecasti.vercel.app/)
 * **FinSight Backend (FastAPI):** [https://finsight-backend-48d8.onrender.com](https://finsight-backend-48d8.onrender.com)
-* **Streamlit Academic Model:** [https://finsight-personal-finance-forecastinggit-wjore5uimswrwqelqib6h.streamlit.app/](https://finsight-personal-finance-forecastinggit-wjore5uimswrwqelqib6h.streamlit.app/)
+* **Streamlit Academic Model:** [https://finsight-personal-finance-forecastinggit-3ssglvr2mo9rjqquujx5k.streamlit.app/](https://finsight-personal-finance-forecastinggit-3ssglvr2mo9rjqquujx5k.streamlit.app/)
 
 ---
 ## 📌 Project Overview

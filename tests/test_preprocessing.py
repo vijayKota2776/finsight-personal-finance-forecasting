@@ -6,7 +6,7 @@ def test_engineer_features_logic():
     """Test that feature engineering correctly creates lag and rolling features."""
     
     # Create mock aggregated monthly data
-    dates = pd.date_range(start='2023-01-01', periods=5, freq='M')
+    dates = pd.date_range(start='2023-01-01', periods=5, freq='ME')
     
     mock_data = {
         'year_month': dates.to_period('M'),

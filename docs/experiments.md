@@ -8,5 +8,4 @@
 | Gradient Boosting Regressor | $5171.12 | $6302.40 | -0.9520 |
 
 ## Conclusion
-The Machine Learning models significantly outperform the Naive Baseline. 
-Random Forest was chosen as the final model due to stability and excellent SHAP explainability.
+Random Forest achieved the best performance among the tested models, improving on the naive baseline in MAE and RMSE. However, the negative R² values indicate that the available dataset has limited predictive signal and that the forecasting model should be considered a prototype rather than a highly accurate production model.

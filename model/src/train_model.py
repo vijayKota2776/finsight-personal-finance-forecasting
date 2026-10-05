@@ -89,8 +89,7 @@ if __name__ == "__main__":
 | Gradient Boosting Regressor | ${gb_metrics['MAE']:.2f} | ${gb_metrics['RMSE']:.2f} | {gb_metrics['R2']:.4f} |
 
 ## Conclusion
-The Machine Learning models significantly outperform the Naive Baseline. 
-Random Forest was chosen as the final model due to stability and excellent SHAP explainability.
+Random Forest achieved the best performance among the tested models, improving on the naive baseline in MAE and RMSE. However, the negative R² values indicate that the available dataset has limited predictive signal and that the forecasting model should be considered a prototype rather than a highly accurate production model.
 """
     with open(os.path.join(docs_dir, "experiments.md"), "w") as f:
         f.write(report)

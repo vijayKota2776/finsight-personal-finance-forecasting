@@ -6,6 +6,7 @@ import { Search, Filter, ArrowDownUp, Download, CreditCard, Banknote } from "luc
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
 
   useEffect(() => {
     const stored = localStorage.getItem("finsight_transactions");
@@ -16,10 +17,31 @@ export default function TransactionsPage() {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
   };
 
-  const filtered = transactions.filter(t => 
-    t.merchant.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    t.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filtered = transactions.filter(t => {
+    const matchesSearch = t.merchant.toLowerCase().includes(searchTerm.toLowerCase()) || t.category.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = filterCategory === "all" || t.category === filterCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const handleDownloadCSV = () => {
+    if (!transactions.length) return;
+    const headers = ["Date", "Merchant", "Category", "Amount", "Type"];
+    const rows = filtered.map(t => [
+      t.date,
+      `"${t.merchant}"`,
+      t.category,
+      t.amount,
+      t.type
+    ]);
+    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "finsight_transactions.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="space-y-6">
@@ -40,10 +62,24 @@ export default function TransactionsPage() {
               className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-emerald-500"
             />
           </div>
-          <button className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600">
-            <Filter className="w-4 h-4" />
-          </button>
-          <button className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600">
+          <select 
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+            className="p-2 border border-gray-200 rounded-lg bg-white text-gray-600 focus:outline-none focus:border-emerald-500 cursor-pointer text-sm"
+          >
+            <option value="all">All Categories</option>
+            <option value="cat_shopping">Shopping</option>
+            <option value="cat_food_drink">Food & Drink</option>
+            <option value="cat_travel">Travel</option>
+            <option value="cat_entertainment">Entertainment</option>
+            <option value="cat_utilities">Utilities</option>
+            <option value="income">Income</option>
+          </select>
+          <button 
+            onClick={handleDownloadCSV}
+            className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600"
+            title="Download CSV"
+          >
             <Download className="w-4 h-4" />
           </button>
         </div>

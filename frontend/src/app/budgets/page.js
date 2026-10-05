@@ -7,6 +7,7 @@ export default function BudgetsPage() {
   const [transactions, setTransactions] = useState([]);
   const [isAuditing, setIsAuditing] = useState(false);
   const [auditComplete, setAuditComplete] = useState(false);
+  const [devMode, setDevMode] = useState(false); // For demoing the locked form
 
   useEffect(() => {
     const stored = localStorage.getItem("finsight_transactions");
@@ -48,7 +49,7 @@ export default function BudgetsPage() {
   });
 
   const today = new Date().getDate();
-  const isFirstDay = today === 1;
+  const isFirstDay = devMode || today === 1;
 
   const handleRunAudit = () => {
     setIsAuditing(true);
@@ -61,6 +62,13 @@ export default function BudgetsPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       
+      <div className="flex justify-end">
+        <label className="flex items-center gap-2 cursor-pointer bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+          <input type="checkbox" checked={devMode} onChange={() => setDevMode(!devMode)} className="accent-emerald-500" />
+          Demo: Unlock Form
+        </label>
+      </div>
+
       {/* Date Header & Notification */}
       <div className={`border rounded-2xl p-4 flex items-start gap-4 ${isFirstDay ? 'bg-blue-50 border-blue-100' : 'bg-gray-50 border-gray-200'}`}>
         <Calendar className={`w-6 h-6 mt-1 shrink-0 ${isFirstDay ? 'text-blue-600' : 'text-gray-500'}`} />

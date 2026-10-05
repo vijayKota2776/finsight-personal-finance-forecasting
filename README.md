@@ -4,6 +4,13 @@
 
 ---
 
+## 🌐 Live Deployments
+
+* **FinSight Frontend (React/Next.js):** [https://finsight-personal-finance-forecasti.vercel.app/](https://finsight-personal-finance-forecasti.vercel.app/)
+* **FinSight Backend (FastAPI):** [https://finsight-backend-48d8.onrender.com](https://finsight-backend-48d8.onrender.com)
+* **Streamlit Academic Model:** [https://finsight-personal-finance-forecastinggit-wjore5uimswrwqelqib6h.streamlit.app/](https://finsight-personal-finance-forecastinggit-wjore5uimswrwqelqib6h.streamlit.app/)
+
+---
 ## 📌 Project Overview
 
 **FinSight** is a full-stack personal finance intelligence prototype designed to help users understand their financial behavior, manage monthly budgets, detect unusual spending, and predict future expenses using machine learning.
